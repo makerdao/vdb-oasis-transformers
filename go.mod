@@ -18,7 +18,7 @@ require (
 	github.com/howeyc/fsnotify v0.9.0 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/influxdata/influxdb v1.7.9 // indirect
-	github.com/makerdao/vulcanizedb v0.0.15-rc.1.0.20200902145853-e5f55623085d
+	github.com/makerdao/vulcanizedb v0.0.15-rc.1.0.20200909153029-7aa1ed76f791
 	github.com/mattn/go-colorable v0.1.2 // indirect
 	github.com/mattn/go-isatty v0.0.9 // indirect
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826 // indirect
