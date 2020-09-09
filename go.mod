@@ -1,4 +1,4 @@
-module github.com/makerdao/oasis-transformers
+module github.com/makerdao/vdb-oasis-transformers
 
 go 1.14
 

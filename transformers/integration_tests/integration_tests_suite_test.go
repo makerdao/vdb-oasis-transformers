@@ -5,7 +5,7 @@ import (
 	"log"
 	"testing"
 
-	"github.com/makerdao/oasis-transformers/test_config"
+	"github.com/makerdao/vdb-oasis-transformers/test_config"
 	"github.com/makerdao/vulcanizedb/pkg/core"
 	"github.com/makerdao/vulcanizedb/pkg/datastore/postgres"
 	. "github.com/onsi/ginkgo"
@@ -26,7 +26,7 @@ var (
 var _ = BeforeSuite(func() {
 	testConfig := viper.New()
 	testConfig.SetConfigName("testing")
-	testConfig.AddConfigPath("$GOPATH/src/github.com/makerdao/oasis-transformers/environments/")
+	testConfig.AddConfigPath("$GOPATH/src/github.com/makerdao/vdb-oasis-transformers/environments/")
 	err := testConfig.ReadInConfig()
 	Expect(err).To(BeNil())
 	ipc = testConfig.GetString("client.ipcPath")

@@ -1,9 +1,9 @@
 package initializer
 
 import (
-	"github.com/makerdao/oasis-transformers/transformers/events/log_trade"
-	"github.com/makerdao/oasis-transformers/transformers/shared"
-	"github.com/makerdao/oasis-transformers/transformers/shared/constants"
+	"github.com/makerdao/vdb-oasis-transformers/transformers/events/log_trade"
+	"github.com/makerdao/vdb-oasis-transformers/transformers/shared"
+	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
 )
 

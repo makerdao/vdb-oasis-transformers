@@ -2,9 +2,10 @@ package constants
 
 import (
 	"fmt"
+	"math"
+
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
-	"math"
 )
 
 var initialized = false
@@ -51,7 +52,7 @@ func getEnvironmentString(key string) string {
 [exporter.vow_file]
 	path = "transformers/events/vow_file/initializer"
 	type = "eth_event"
-	repository = "github.com/makerdao/oasis-transformers"
+	repository = "github.com/makerdao/vdb-oasis-transformers"
 	migrations = "db/migrations"
 	contracts = ["MCD_VOW"]   <----
 	rank = "0"

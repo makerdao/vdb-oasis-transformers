@@ -1,10 +1,10 @@
 package log_sorted_offer_test
 
 import (
-	"github.com/makerdao/oasis-transformers/test_config"
-	"github.com/makerdao/oasis-transformers/transformers/events/log_sorted_offer"
-	"github.com/makerdao/oasis-transformers/transformers/shared/constants"
-	"github.com/makerdao/oasis-transformers/transformers/test_data"
+	"github.com/makerdao/vdb-oasis-transformers/test_config"
+	"github.com/makerdao/vdb-oasis-transformers/transformers/events/log_sorted_offer"
+	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
+	"github.com/makerdao/vdb-oasis-transformers/transformers/test_data"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
 	"github.com/makerdao/vulcanizedb/pkg/core"
 	. "github.com/onsi/ginkgo"

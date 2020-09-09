@@ -1,7 +1,7 @@
 package shared
 
 import (
-	"github.com/makerdao/oasis-transformers/transformers/shared/constants"
+	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
 )
 

@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
-	"github.com/makerdao/oasis-transformers/transformers/shared"
-	"github.com/makerdao/oasis-transformers/transformers/shared/constants"
+	"github.com/makerdao/vdb-oasis-transformers/transformers/shared"
+	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
 	"github.com/makerdao/vulcanizedb/pkg/core"
 	"github.com/makerdao/vulcanizedb/pkg/datastore/postgres"

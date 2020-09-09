@@ -3,9 +3,10 @@ package test_data
 import (
 	"bytes"
 	"encoding/gob"
+
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/makerdao/oasis-transformers/transformers/shared"
-	"github.com/makerdao/oasis-transformers/transformers/shared/constants"
+	"github.com/makerdao/vdb-oasis-transformers/transformers/shared"
+	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
 	"github.com/makerdao/vulcanizedb/libraries/shared/test_data"
 	"github.com/makerdao/vulcanizedb/pkg/core"

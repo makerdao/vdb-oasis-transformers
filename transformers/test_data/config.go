@@ -10,6 +10,6 @@ import (
 func SetTestConfig() bool {
 	logrus.SetOutput(ioutil.Discard)
 	viper.SetConfigName("testing")
-	viper.AddConfigPath("$GOPATH/src/github.com/makerdao/oasis-transformers/environments/")
+	viper.AddConfigPath("$GOPATH/src/github.com/makerdao/vdb-oasis-transformers/environments/")
 	return true
 }

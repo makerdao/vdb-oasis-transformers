@@ -1,7 +1,7 @@
 package constants_test
 
 import (
-	"github.com/makerdao/oasis-transformers/transformers/shared/constants"
+	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

@@ -1,8 +1,9 @@
 package constants_test
 
 import (
-	"github.com/makerdao/oasis-transformers/transformers/test_data"
 	"testing"
+
+	"github.com/makerdao/vdb-oasis-transformers/transformers/test_data"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

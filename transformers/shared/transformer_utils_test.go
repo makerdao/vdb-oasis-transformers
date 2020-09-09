@@ -19,7 +19,7 @@ package shared_test
 import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/makerdao/oasis-transformers/transformers/shared"
+	"github.com/makerdao/vdb-oasis-transformers/transformers/shared"
 	"github.com/makerdao/vulcanizedb/pkg/fakes"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

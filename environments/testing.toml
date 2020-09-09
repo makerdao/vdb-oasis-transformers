@@ -35,98 +35,98 @@
     [exporter.log_bump]
         path = "transformers/events/log_bump/initializer"
         type = "eth_event"
-        repository = "github.com/makerdao/oasis-transformers"
+        repository = "github.com/makerdao/vdb-oasis-transformers"
         migrations = "db/migrations"
         contracts = ["OASIS_MATCHING_MARKET_ONE", "OASIS_MATCHING_MARKET_TWO"]
         rank = "0"
     [exporter.log_buy_enabled]
         path = "transformers/events/log_buy_enabled/initializer"
         type = "eth_event"
-        repository = "github.com/makerdao/oasis-transformers"
+        repository = "github.com/makerdao/vdb-oasis-transformers"
         migrations = "db/migrations"
         contracts = ["OASIS_MATCHING_MARKET_ONE", "OASIS_MATCHING_MARKET_TWO"]
         rank = "0"
     [exporter.log_delete]
         path = "transformers/events/log_delete/initializer"
         type = "eth_event"
-        repository = "github.com/makerdao/oasis-transformers"
+        repository = "github.com/makerdao/vdb-oasis-transformers"
         migrations = "db/migrations"
         contracts = ["OASIS_MATCHING_MARKET_ONE", "OASIS_MATCHING_MARKET_TWO"]
         rank = "0"
     [exporter.log_insert]
         path = "transformers/events/log_insert/initializer"
         type = "eth_event"
-        repository = "github.com/makerdao/oasis-transformers"
+        repository = "github.com/makerdao/vdb-oasis-transformers"
         migrations = "db/migrations"
         contracts = ["OASIS_MATCHING_MARKET_ONE", "OASIS_MATCHING_MARKET_TWO"]
         rank = "0"
     [exporter.log_item_update]
         path = "transformers/events/log_item_update/initializer"
         type = "eth_event"
-        repository = "github.com/makerdao/oasis-transformers"
+        repository = "github.com/makerdao/vdb-oasis-transformers"
         migrations = "db/migrations"
         contracts = ["OASIS_MATCHING_MARKET_ONE", "OASIS_MATCHING_MARKET_TWO"]
         rank = "0"
     [exporter.log_kill]
         path = "transformers/events/log_kill/initializer"
         type = "eth_event"
-        repository = "github.com/makerdao/oasis-transformers"
+        repository = "github.com/makerdao/vdb-oasis-transformers"
         migrations = "db/migrations"
         contracts = ["OASIS_MATCHING_MARKET_ONE", "OASIS_MATCHING_MARKET_TWO"]
         rank = "0"
     [exporter.log_make]
         path = "transformers/events/log_make/initializer"
         type = "eth_event"
-        repository = "github.com/makerdao/oasis-transformers"
+        repository = "github.com/makerdao/vdb-oasis-transformers"
         migrations = "db/migrations"
         contracts = ["OASIS_MATCHING_MARKET_ONE", "OASIS_MATCHING_MARKET_TWO"]
         rank = "0"
     [exporter.log_matching_enabled]
         path = "transformers/events/log_matching_enabled/initializer"
         type = "eth_event"
-        repository = "github.com/makerdao/oasis-transformers"
+        repository = "github.com/makerdao/vdb-oasis-transformers"
         migrations = "db/migrations"
         contracts = ["OASIS_MATCHING_MARKET_ONE", "OASIS_MATCHING_MARKET_TWO"]
         rank = "0"
     [exporter.log_min_sell]
         path = "transformers/events/log_min_sell/initializer"
         type = "eth_event"
-        repository = "github.com/makerdao/oasis-transformers"
+        repository = "github.com/makerdao/vdb-oasis-transformers"
         migrations = "db/migrations"
         contracts = ["OASIS_MATCHING_MARKET_ONE", "OASIS_MATCHING_MARKET_TWO"]
         rank = "0"
     [exporter.log_sorted_offer]
         path = "transformers/events/log_sorted_offer/initializer"
         type = "eth_event"
-        repository = "github.com/makerdao/oasis-transformers"
+        repository = "github.com/makerdao/vdb-oasis-transformers"
         migrations = "db/migrations"
         contracts = ["OASIS_MATCHING_MARKET_ONE", "OASIS_MATCHING_MARKET_TWO"]
         rank = "0"
     [exporter.log_take]
         path = "transformers/events/log_take/initializer"
         type = "eth_event"
-        repository = "github.com/makerdao/oasis-transformers"
+        repository = "github.com/makerdao/vdb-oasis-transformers"
         migrations = "db/migrations"
         contracts = ["OASIS_MATCHING_MARKET_ONE", "OASIS_MATCHING_MARKET_TWO"]
         rank = "0"
     [exporter.log_trade]
         path = "transformers/events/log_trade/initializer"
         type = "eth_event"
-        repository = "github.com/makerdao/oasis-transformers"
+        repository = "github.com/makerdao/vdb-oasis-transformers"
         migrations = "db/migrations"
         contracts = ["OASIS_MATCHING_MARKET_ONE", "OASIS_MATCHING_MARKET_TWO"]
         rank = "0"
     [exporter.log_unsorted_offer]
         path = "transformers/events/log_unsorted_offer/initializer"
         type = "eth_event"
-        repository = "github.com/makerdao/oasis-transformers"
+        repository = "github.com/makerdao/vdb-oasis-transformers"
         migrations = "db/migrations"
         contracts = ["OASIS_MATCHING_MARKET_ONE", "OASIS_MATCHING_MARKET_TWO"]
         rank = "0"
     [exporter.set_min_sell]
         path = "transformers/events/set_min_sell/initializer"
         type = "eth_event"
-        repository = "github.com/makerdao/oasis-transformers"
+        repository = "github.com/makerdao/vdb-oasis-transformers"
         migrations = "db/migrations"
         contracts = ["OASIS_MATCHING_MARKET_ONE", "OASIS_MATCHING_MARKET_TWO"]
         rank = "0"

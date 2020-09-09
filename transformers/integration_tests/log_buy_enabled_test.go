@@ -2,10 +2,10 @@ package integration_tests
 
 import (
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/makerdao/oasis-transformers/test_config"
-	"github.com/makerdao/oasis-transformers/transformers/events/log_buy_enabled"
-	"github.com/makerdao/oasis-transformers/transformers/shared/constants"
-	"github.com/makerdao/oasis-transformers/transformers/test_data"
+	"github.com/makerdao/vdb-oasis-transformers/test_config"
+	"github.com/makerdao/vdb-oasis-transformers/transformers/events/log_buy_enabled"
+	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
+	"github.com/makerdao/vdb-oasis-transformers/transformers/test_data"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
 	"github.com/makerdao/vulcanizedb/libraries/shared/fetcher"
 	. "github.com/onsi/ginkgo"
