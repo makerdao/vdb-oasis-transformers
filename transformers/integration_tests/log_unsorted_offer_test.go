@@ -50,7 +50,7 @@ var _ = Describe("LogUnsortedOffer Transformer", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		var dbResult []string
-		err = db.Select(&dbResult, `SELECT offer_id FROM maker.log_unsorted_offer`)
+		err = db.Select(&dbResult, `SELECT offer_id FROM oasis.log_unsorted_offer`)
 		Expect(err).NotTo(HaveOccurred())
 
 		Expect(dbResult).To(ConsistOf("717050"))

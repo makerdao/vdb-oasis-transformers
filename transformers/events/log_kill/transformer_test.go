@@ -35,7 +35,7 @@ var _ = Describe("LogKill Transformer", func() {
 		buyGemAddressId, buyGemAddressErr := shared.GetOrCreateAddress(test_data.BuyGemAddress.Hex(), db)
 		Expect(buyGemAddressErr).NotTo(HaveOccurred())
 
-		expectedModel.ColumnValues[constants.MakerColumn] = makerAddressId
+		expectedModel.ColumnValues[constants.OasisColumn] = makerAddressId
 		expectedModel.ColumnValues[constants.PayGemColumn] = payGemAddressId
 		expectedModel.ColumnValues[constants.BuyGemColumn] = buyGemAddressId
 

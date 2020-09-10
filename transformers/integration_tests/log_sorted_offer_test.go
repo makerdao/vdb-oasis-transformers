@@ -50,7 +50,7 @@ var _ = Describe("LogSortedOffer Transformer", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		var dbResult []string
-		err = db.Select(&dbResult, `SELECT offer_id FROM maker.log_sorted_offer`)
+		err = db.Select(&dbResult, `SELECT offer_id FROM oasis.log_sorted_offer`)
 		Expect(err).NotTo(HaveOccurred())
 
 		Expect(dbResult).To(ConsistOf("811647", "811648"))
@@ -86,7 +86,7 @@ var _ = Describe("LogSortedOffer Transformer", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		var dbResult []string
-		err = db.Select(&dbResult, `SELECT offer_id from maker.log_sorted_offer`)
+		err = db.Select(&dbResult, `SELECT offer_id from oasis.log_sorted_offer`)
 		Expect(err).NotTo(HaveOccurred())
 
 		Expect(dbResult).To(ConsistOf("253097"))

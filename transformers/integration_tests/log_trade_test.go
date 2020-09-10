@@ -51,7 +51,7 @@ var _ = Describe("LogTrade Transformer", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		var dbResults []logTradeModel
-		err = db.Select(&dbResults, `SELECT pay_gem, buy_gem, pay_amt, buy_amt, address_id from maker.log_trade`)
+		err = db.Select(&dbResults, `SELECT pay_gem, buy_gem, pay_amt, buy_amt, address_id from oasis.log_trade`)
 		Expect(err).NotTo(HaveOccurred())
 
 		expectedAddressID, addressErr := shared.GetOrCreateAddress(oasisOneAddress, db)
@@ -99,7 +99,7 @@ var _ = Describe("LogTrade Transformer", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		var dbResults []logTradeModel
-		err = db.Select(&dbResults, `SELECT pay_gem, buy_gem, pay_amt, buy_amt, address_id from maker.log_trade`)
+		err = db.Select(&dbResults, `SELECT pay_gem, buy_gem, pay_amt, buy_amt, address_id from oasis.log_trade`)
 		Expect(err).NotTo(HaveOccurred())
 
 		Expect(len(dbResults)).To(Equal(1))

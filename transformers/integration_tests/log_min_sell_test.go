@@ -53,7 +53,7 @@ var _ = Describe("LogMinSell Transformer", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		var dbResults []logMinSellModel
-		err = db.Select(&dbResults, `SELECT pay_gem, min_amount, address_id from maker.log_min_sell`)
+		err = db.Select(&dbResults, `SELECT pay_gem, min_amount, address_id from oasis.log_min_sell`)
 		Expect(err).NotTo(HaveOccurred())
 
 		expectedAddressID, addressErr := shared.GetOrCreateAddress(oasis_one_address, db)
@@ -98,7 +98,7 @@ var _ = Describe("LogMinSell Transformer", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		var dbResults []logMinSellModel
-		err = db.Select(&dbResults, `SELECT pay_gem, min_amount, address_id from maker.log_min_sell`)
+		err = db.Select(&dbResults, `SELECT pay_gem, min_amount, address_id from oasis.log_min_sell`)
 		Expect(err).NotTo(HaveOccurred())
 
 		expectedAddressID, addressErr := shared.GetOrCreateAddress(oasis_two_address, db)

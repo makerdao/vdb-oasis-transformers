@@ -50,7 +50,7 @@ var _ = Describe("LogItemUpdate Transformer", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		var dbResult []logItemUpdateModel
-		err = db.Select(&dbResult, `SELECT offer_id from maker.log_item_update`)
+		err = db.Select(&dbResult, `SELECT offer_id from oasis.log_item_update`)
 		Expect(err).NotTo(HaveOccurred())
 
 		Expect(len(dbResult)).To(Equal(15))
@@ -94,7 +94,7 @@ var _ = Describe("LogItemUpdate Transformer", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		var dbResult []logItemUpdateModel
-		err = db.Select(&dbResult, `SELECT offer_id from maker.log_item_update`)
+		err = db.Select(&dbResult, `SELECT offer_id from oasis.log_item_update`)
 		Expect(err).NotTo(HaveOccurred())
 
 		Expect(len(dbResult)).To(Equal(3))

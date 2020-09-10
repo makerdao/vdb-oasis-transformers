@@ -52,9 +52,9 @@ func (t Transformer) ToModels(abi string, logs []core.EventLog, db *postgres.DB)
 		if addressErr != nil {
 			return nil, shared.ErrCouldNotCreateFK(addressErr)
 		}
-		makerID, makerErr := shared.GetOrCreateAddress(entity.Maker.Hex(), db)
-		if makerErr != nil {
-			return nil, shared.ErrCouldNotCreateFK(makerErr)
+		oasisID, oasisErr := shared.GetOrCreateAddress(entity.Maker.Hex(), db)
+		if oasisErr != nil {
+			return nil, shared.ErrCouldNotCreateFK(oasisErr)
 		}
 		payGemID, payGemErr := shared.GetOrCreateAddress(entity.PayGem.Hex(), db)
 		if payGemErr != nil {
@@ -70,7 +70,7 @@ func (t Transformer) ToModels(abi string, logs []core.EventLog, db *postgres.DB)
 			TableName:  constants.LogMakeTable,
 			OrderedColumns: []event.ColumnName{
 				event.HeaderFK, event.LogFK, event.AddressFK, constants.OfferId, constants.PairColumn,
-				constants.MakerColumn, constants.PayGemColumn, constants.BuyGemColumn, constants.PayAmtColumn,
+				constants.OasisColumn, constants.PayGemColumn, constants.BuyGemColumn, constants.PayAmtColumn,
 				constants.BuyAmtColumn, constants.TimestampColumn,
 			},
 			ColumnValues: event.ColumnValues{
@@ -79,7 +79,7 @@ func (t Transformer) ToModels(abi string, logs []core.EventLog, db *postgres.DB)
 				event.AddressFK:           addressID,
 				constants.OfferId:         shared.BigIntToString(offerID),
 				constants.PairColumn:      entity.Pair.Hex(),
-				constants.MakerColumn:     makerID,
+				constants.OasisColumn:     oasisID,
 				constants.PayGemColumn:    payGemID,
 				constants.BuyGemColumn:    buyGemID,
 				constants.PayAmtColumn:    shared.BigIntToString(entity.PayAmt),

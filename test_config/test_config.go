@@ -78,12 +78,12 @@ func NewTestDB(node core.Node) *postgres.DB {
 // so deletion can be run in any order.
 func CleanTestDB(db *postgres.DB) {
 	if len(wipeTableQueries) == 0 {
-		// The generated queries delete from all tables in the public and maker schemas,
+		// The generated queries delete from all tables in the public and oasis schemas,
 		// except eth_nodes and goose_db_version.
 		err := db.Select(&wipeTableQueries,
 			`SELECT 'DELETE FROM ' || schemaname || '.' || relname || ';'
 			FROM pg_stat_user_tables
-			WHERE schemaname IN ('public', 'maker', 'api')
+			WHERE schemaname IN ('public', 'oasis', 'api')
 			AND relname NOT IN ('eth_nodes', 'goose_db_version');`)
 		if err != nil {
 			panic("Failed to generate DB cleaning query: " + err.Error())

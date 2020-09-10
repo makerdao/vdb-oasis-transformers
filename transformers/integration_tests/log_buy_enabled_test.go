@@ -50,7 +50,7 @@ var _ = Describe("LogBuyEnabled Transformer", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		var dbResult []logBuyEnabledModel
-		err = db.Select(&dbResult, `SELECT is_enabled from maker.log_buy_enabled`)
+		err = db.Select(&dbResult, `SELECT is_enabled from oasis.log_buy_enabled`)
 		Expect(err).NotTo(HaveOccurred())
 
 		Expect(dbResult).To(Equal(true)) //TODO: update with test

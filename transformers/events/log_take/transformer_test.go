@@ -38,7 +38,7 @@ var _ = Describe("LogTake Transformer", func() {
 		buyGemID, buyGemErr := shared.GetOrCreateAddress(test_data.LogTakeBuyGemAddress.Hex(), db)
 		Expect(buyGemErr).NotTo(HaveOccurred())
 
-		expectedModel.ColumnValues[constants.MakerColumn] = makerID
+		expectedModel.ColumnValues[constants.OasisColumn] = makerID
 		expectedModel.ColumnValues[constants.TakerColumn] = takerID
 		expectedModel.ColumnValues[constants.PayGemColumn] = payGemID
 		expectedModel.ColumnValues[constants.BuyGemColumn] = buyGemID

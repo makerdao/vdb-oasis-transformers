@@ -51,7 +51,7 @@ var _ = Describe("LogInsert Transformer", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		var dbResults []logInsertModel
-		err = db.Select(&dbResults, `SELECT address_id, keeper, offer_id from maker.log_insert`)
+		err = db.Select(&dbResults, `SELECT address_id, keeper, offer_id from oasis.log_insert`)
 		Expect(err).NotTo(HaveOccurred())
 
 		expectedAddressID, addressErr := shared.GetOrCreateAddress(oasisOneAddress, db)

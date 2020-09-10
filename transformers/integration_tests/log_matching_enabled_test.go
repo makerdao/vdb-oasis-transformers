@@ -50,7 +50,7 @@ var _ = Describe("LogMatchingEnabled Transformer", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		var dbResult []LogMatchingEnabledModel
-		err = db.Select(&dbResult, `SELECT is_enabled from maker.log_matching_enabled`)
+		err = db.Select(&dbResult, `SELECT is_enabled from oasis.log_matching_enabled`)
 		Expect(err).NotTo(HaveOccurred())
 
 		Expect(dbResult).To(Equal(true)) //TODO: update with test

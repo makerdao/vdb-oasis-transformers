@@ -44,7 +44,7 @@ var (
 		TableName:  constants.LogTakeTable,
 		OrderedColumns: []event.ColumnName{
 			event.HeaderFK, event.LogFK, event.AddressFK, constants.OfferId, constants.PairColumn,
-			constants.MakerColumn, constants.PayGemColumn, constants.BuyGemColumn, constants.TakerColumn,
+			constants.OasisColumn, constants.PayGemColumn, constants.BuyGemColumn, constants.TakerColumn,
 			constants.TakeAmtColumn, constants.GiveAmtColumn, constants.TimestampColumn,
 		},
 		ColumnValues: event.ColumnValues{
@@ -53,7 +53,7 @@ var (
 			// Oasis contract address id
 			constants.OfferId:    "811628",
 			constants.PairColumn: "0xcdd6659bca20e2b28ea10ead902280762ac8977c84459a152f90e561d50edf8c",
-			// Maker address id
+			// Oasis address id
 			// Pay gem address id
 			// Buy gem address id
 			// Taker address id

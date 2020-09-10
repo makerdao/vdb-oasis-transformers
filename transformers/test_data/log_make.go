@@ -43,7 +43,7 @@ var (
 		SchemaName: constants.OasisSchema,
 		TableName:  constants.LogMakeTable,
 		OrderedColumns: []event.ColumnName{
-			event.HeaderFK, event.LogFK, event.AddressFK, constants.OfferId, constants.PairColumn, constants.MakerColumn, constants.PayGemColumn,
+			event.HeaderFK, event.LogFK, event.AddressFK, constants.OfferId, constants.PairColumn, constants.OasisColumn, constants.PayGemColumn,
 			constants.BuyGemColumn, constants.PayAmtColumn, constants.BuyAmtColumn, constants.TimestampColumn,
 		},
 		ColumnValues: event.ColumnValues{
@@ -52,7 +52,7 @@ var (
 			// Oasis contract address id
 			constants.OfferId:    "811648",
 			constants.PairColumn: "0xcdd6659bca20e2b28ea10ead902280762ac8977c84459a152f90e561d50edf8c",
-			// Maker address id
+			// Oasis address id
 			// Pay gem address id
 			// Buy gem address id
 			constants.PayAmtColumn:    "64380000000000000000",

@@ -44,7 +44,7 @@ var _ = XDescribe("LogSortedOffer Transformer", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		var dbResult logDeleteModel
-		err = db.Get(&dbResult, `SELECT keeper, offer_id FROM maker.log_delete`)
+		err = db.Get(&dbResult, `SELECT keeper, offer_id FROM oasis.log_delete`)
 		Expect(err).NotTo(HaveOccurred())
 
 		keeperID, keeperErr := shared.GetOrCreateAddress(test_data.LogDeleteKeeperAddress.Hex(), db)

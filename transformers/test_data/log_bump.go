@@ -43,7 +43,7 @@ var (
 		SchemaName: constants.OasisSchema,
 		TableName:  constants.LogBumpTable,
 		OrderedColumns: []event.ColumnName{
-			event.HeaderFK, event.LogFK, event.AddressFK, constants.OfferId, constants.PairColumn, constants.MakerColumn, constants.PayGemColumn,
+			event.HeaderFK, event.LogFK, event.AddressFK, constants.OfferId, constants.PairColumn, constants.OasisColumn, constants.PayGemColumn,
 			constants.BuyGemColumn, constants.PayAmtColumn, constants.BuyAmtColumn, constants.TimestampColumn,
 		},
 		ColumnValues: event.ColumnValues{
@@ -52,7 +52,7 @@ var (
 			// Oasis contract address id
 			constants.OfferId:    "286499",
 			constants.PairColumn: "0x10aed75aa327f09ef87e5bdfaedf498ca260499a251ae5e049ddbd5e1633cd9c",
-			// Maker address id
+			// Oasis address id
 			// Pay gem address id
 			// Buy gem address id
 			constants.PayAmtColumn:    "6153000000000000000",

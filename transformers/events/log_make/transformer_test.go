@@ -29,9 +29,9 @@ var _ = Describe("LogMake Transformer", func() {
 
 		expectedModel := test_data.LogMakeModel()
 		test_data.AssignAddressID(test_data.LogMakeEventLog, expectedModel, db)
-		makerID, makerErr := shared.GetOrCreateAddress(common.HexToAddress(test_data.LogMakeEventLog.Log.Topics[3].Hex()).Hex(), db)
-		Expect(makerErr).NotTo(HaveOccurred())
-		expectedModel.ColumnValues[constants.MakerColumn] = makerID
+		oasisID, oasisErr := shared.GetOrCreateAddress(common.HexToAddress(test_data.LogMakeEventLog.Log.Topics[3].Hex()).Hex(), db)
+		Expect(oasisErr).NotTo(HaveOccurred())
+		expectedModel.ColumnValues[constants.OasisColumn] = oasisID
 		payGemID, payGemErr := shared.GetOrCreateAddress(test_data.LogMakePayGemAddress.Hex(), db)
 		Expect(payGemErr).NotTo(HaveOccurred())
 		expectedModel.ColumnValues[constants.PayGemColumn] = payGemID

@@ -48,7 +48,7 @@ var (
 			event.AddressFK,
 			constants.OfferId,
 			constants.PairColumn,
-			constants.MakerColumn,
+			constants.OasisColumn,
 			constants.PayGemColumn,
 			constants.BuyGemColumn,
 			constants.PayAmtColumn,
@@ -61,7 +61,7 @@ var (
 			// Oasis address
 			constants.OfferId:    "604350",
 			constants.PairColumn: "0xd257ccbe93e550a27236e8cc4971336f6cd2d53037ad567f10fbcc28df6a1eb1",
-			// Maker address
+			// Oasis address
 			// PayGem address
 			// BuyGem address
 			constants.PayAmtColumn:    "2000000000000000000",
