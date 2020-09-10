@@ -1,6 +1,4 @@
 -- +goose Up
-CREATE SCHEMA oasis;
-
 CREATE TABLE oasis.log_item_update
 (
     id         SERIAL PRIMARY KEY,
@@ -20,4 +18,3 @@ CREATE INDEX log_item_update_address_index
 
 -- +goose Down
 DROP TABLE oasis.log_item_update;
-DROP SCHEMA oasis;
