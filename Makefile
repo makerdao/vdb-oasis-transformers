@@ -16,6 +16,10 @@ LINT = $(BIN)/golint
 $(BIN)/golint:
 	go get -u golang.org/x/lint/golint
 
+.PHONY: installtools
+installtools: | $(LINT) $(GINKGO)
+	echo "Installing tools"
+
 #Test
 TEST_DB = vulcanize_testing
 TEST_CONNECT_STRING = postgresql://localhost:5432/$(TEST_DB)?sslmode=disable
