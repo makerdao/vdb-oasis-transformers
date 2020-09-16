@@ -28,6 +28,37 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: checked_headers; Type: TABLE; Schema: oasis; Owner: -
+--
+
+CREATE TABLE oasis.checked_headers (
+    id integer NOT NULL,
+    check_count integer,
+    header_id integer NOT NULL
+);
+
+
+--
+-- Name: checked_headers_id_seq; Type: SEQUENCE; Schema: oasis; Owner: -
+--
+
+CREATE SEQUENCE oasis.checked_headers_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: checked_headers_id_seq; Type: SEQUENCE OWNED BY; Schema: oasis; Owner: -
+--
+
+ALTER SEQUENCE oasis.checked_headers_id_seq OWNED BY oasis.checked_headers.id;
+
+
+--
 -- Name: goose_db_version; Type: TABLE; Schema: oasis; Owner: -
 --
 
@@ -559,6 +590,13 @@ ALTER SEQUENCE oasis.set_min_sell_id_seq OWNED BY oasis.set_min_sell.id;
 
 
 --
+-- Name: checked_headers id; Type: DEFAULT; Schema: oasis; Owner: -
+--
+
+ALTER TABLE ONLY oasis.checked_headers ALTER COLUMN id SET DEFAULT nextval('oasis.checked_headers_id_seq'::regclass);
+
+
+--
 -- Name: goose_db_version id; Type: DEFAULT; Schema: oasis; Owner: -
 --
 
@@ -661,6 +699,22 @@ ALTER TABLE ONLY oasis.log_unsorted_offer ALTER COLUMN id SET DEFAULT nextval('o
 --
 
 ALTER TABLE ONLY oasis.set_min_sell ALTER COLUMN id SET DEFAULT nextval('oasis.set_min_sell_id_seq'::regclass);
+
+
+--
+-- Name: checked_headers checked_headers_header_id_key; Type: CONSTRAINT; Schema: oasis; Owner: -
+--
+
+ALTER TABLE ONLY oasis.checked_headers
+    ADD CONSTRAINT checked_headers_header_id_key UNIQUE (header_id);
+
+
+--
+-- Name: checked_headers checked_headers_pkey; Type: CONSTRAINT; Schema: oasis; Owner: -
+--
+
+ALTER TABLE ONLY oasis.checked_headers
+    ADD CONSTRAINT checked_headers_pkey PRIMARY KEY (id);
 
 
 --
@@ -893,6 +947,20 @@ ALTER TABLE ONLY oasis.set_min_sell
 
 ALTER TABLE ONLY oasis.set_min_sell
     ADD CONSTRAINT set_min_sell_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: checked_headers_check_count; Type: INDEX; Schema: oasis; Owner: -
+--
+
+CREATE INDEX checked_headers_check_count ON oasis.checked_headers USING btree (check_count);
+
+
+--
+-- Name: checked_headers_header_index; Type: INDEX; Schema: oasis; Owner: -
+--
+
+CREATE INDEX checked_headers_header_index ON oasis.checked_headers USING btree (header_id);
 
 
 --
@@ -1327,6 +1395,14 @@ CREATE INDEX set_min_sell_msg_sender ON oasis.set_min_sell USING btree (msg_send
 --
 
 CREATE INDEX set_min_sell_pay_gem_index ON oasis.set_min_sell USING btree (pay_gem);
+
+
+--
+-- Name: checked_headers checked_headers_header_id_fkey; Type: FK CONSTRAINT; Schema: oasis; Owner: -
+--
+
+ALTER TABLE ONLY oasis.checked_headers
+    ADD CONSTRAINT checked_headers_header_id_fkey FOREIGN KEY (header_id) REFERENCES public.headers(id) ON DELETE CASCADE;
 
 
 --
