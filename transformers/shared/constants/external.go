@@ -49,12 +49,12 @@ func getEnvironmentString(key string) string {
 }
 
 /* Returns all contract config names from transformer configuration:
-[exporter.vow_file]
-	path = "transformers/events/vow_file/initializer"
+[exporter.log_bump]
+	path = "transformers/events/log_bump/initializer"
 	type = "eth_event"
 	repository = "github.com/makerdao/vdb-oasis-transformers"
 	migrations = "db/migrations"
-	contracts = ["MCD_VOW"]   <----
+	contracts = ["OASIS_MATCHING_MARKET_ONE", "OASIS_MATCHING_MARKET_TWO"] <---
 	rank = "0"
 */
 func GetTransformerContractNames(transformerLabel string) []string {
