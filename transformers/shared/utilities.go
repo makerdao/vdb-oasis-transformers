@@ -3,9 +3,10 @@ package shared
 import (
 	"errors"
 	"fmt"
+	"math/big"
+
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/makerdao/vulcanizedb/libraries/shared/constants"
-	"math/big"
 )
 
 var ErrInvalidIndex = func(index int) error {

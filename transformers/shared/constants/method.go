@@ -2,10 +2,11 @@ package constants
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/makerdao/vulcanizedb/pkg/eth"
 	"github.com/sirupsen/logrus"
-	"strings"
 )
 
 func getSolidityFunctionSignature(abi, name string) string {
