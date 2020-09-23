@@ -18,14 +18,12 @@ package test_config
 
 import (
 	"fmt"
-	"os"
-
-	log "github.com/sirupsen/logrus"
-	"github.com/spf13/viper"
 
 	"github.com/makerdao/vulcanizedb/pkg/config"
 	"github.com/makerdao/vulcanizedb/pkg/core"
 	"github.com/makerdao/vulcanizedb/pkg/datastore/postgres"
+	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 )
 
 var TestConfig *viper.Viper
@@ -36,7 +34,6 @@ var wipeTableQueries []string
 
 func init() {
 	setTestConfig()
-	setABIPath()
 }
 
 func setTestConfig() {
@@ -45,7 +42,7 @@ func setTestConfig() {
 	TestConfig.AddConfigPath("$GOPATH/src/github.com/makerdao/vdb-oasis-transformers/environments/")
 	err := TestConfig.ReadInConfig()
 	if err != nil {
-		log.Fatal(err)
+		logrus.Fatal(err)
 	}
 	ipc := TestConfig.GetString("client.ipcPath")
 	hn := TestConfig.GetString("database.hostname")
@@ -59,11 +56,6 @@ func setTestConfig() {
 	TestClient = config.Client{
 		IPCPath: ipc,
 	}
-}
-
-func setABIPath() {
-	gp := os.Getenv("GOPATH")
-	ABIFilePath = gp + "/src/github.com/makerdao/vulcanizedb/pkg/eth/testing/"
 }
 
 func NewTestDB(node core.Node) *postgres.DB {
