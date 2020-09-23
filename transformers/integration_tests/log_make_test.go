@@ -53,13 +53,13 @@ var _ = Describe("LogMake Transformer", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		var dbResults []logMakeModel
-		err = db.Select(&dbResults, `SELECT offer_id, pair, oasis, pay_gem, buy_gem, pay_amt, buy_amt, timestamp, address_id from oasis.log_make`)
+		err = db.Select(&dbResults, `SELECT offer_id, pair, maker, pay_gem, buy_gem, pay_amt, buy_amt, timestamp, address_id from oasis.log_make`)
 		Expect(err).NotTo(HaveOccurred())
 
 		expectedAddressID, addressErr := shared.GetOrCreateAddress(oasisOneAddress, db)
 		Expect(addressErr).NotTo(HaveOccurred())
-		expectedOasisID, oasisErr := shared.GetOrCreateAddress("0x6Ff7D252627D35B8eb02607c8F27ACDB18032718", db)
-		Expect(oasisErr).NotTo(HaveOccurred())
+		expectedMakerID, makerErr := shared.GetOrCreateAddress("0x6Ff7D252627D35B8eb02607c8F27ACDB18032718", db)
+		Expect(makerErr).NotTo(HaveOccurred())
 		expectedPayGemID, payGemErr := shared.GetOrCreateAddress("0x6B175474E89094C44Da98b954EedeAC495271d0F", db)
 		Expect(payGemErr).NotTo(HaveOccurred())
 		expectedBuyGemID, buyGemErr := shared.GetOrCreateAddress("0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", db)
@@ -70,7 +70,7 @@ var _ = Describe("LogMake Transformer", func() {
 		dbResult := dbResults[0]
 		Expect(dbResult.OfferID).To(Equal("811645"))
 		Expect(dbResult.Pair).To(Equal("0x7bda8b27e891f9687bd6d3312ab3f4f458e2cc91916429d721d617df7ac29fb8"))
-		Expect(dbResult.Oasis).To(Equal(expectedOasisID))
+		Expect(dbResult.Maker).To(Equal(expectedMakerID))
 		Expect(dbResult.PayGem).To(Equal(expectedPayGemID))
 		Expect(dbResult.BuyGem).To(Equal(expectedBuyGemID))
 		Expect(dbResult.PayAmt).To(Equal("67707612000000000000000"))
@@ -109,15 +109,15 @@ var _ = Describe("LogMake Transformer", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		var dbResults []logMakeModel
-		err = db.Select(&dbResults, `SELECT offer_id, pair, oasis, pay_gem, buy_gem, pay_amt, buy_amt, timestamp, address_id from oasis.log_make`)
+		err = db.Select(&dbResults, `SELECT offer_id, pair, maker, pay_gem, buy_gem, pay_amt, buy_amt, timestamp, address_id from oasis.log_make`)
 		Expect(err).NotTo(HaveOccurred())
 
 		Expect(len(dbResults)).To(Equal(1))
 		dbResult := dbResults[0]
 		expectedAddressID, addressErr := shared.GetOrCreateAddress(oasisTwoAddress, db)
 		Expect(addressErr).NotTo(HaveOccurred())
-		expectedOasisID, oasisErr := shared.GetOrCreateAddress("0xbAEaFc49d8e3a636d61df1F14fd45b97c7018020", db)
-		Expect(oasisErr).NotTo(HaveOccurred())
+		expectedMakerID, makerErr := shared.GetOrCreateAddress("0xbAEaFc49d8e3a636d61df1F14fd45b97c7018020", db)
+		Expect(makerErr).NotTo(HaveOccurred())
 		expectedPayGemID, payGemErr := shared.GetOrCreateAddress("0x6B175474E89094C44Da98b954EedeAC495271d0F", db)
 		Expect(payGemErr).NotTo(HaveOccurred())
 		expectedBuyGemID, buyGemErr := shared.GetOrCreateAddress("0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", db)
@@ -125,7 +125,7 @@ var _ = Describe("LogMake Transformer", func() {
 
 		Expect(dbResult.OfferID).To(Equal("247773"))
 		Expect(dbResult.Pair).To(Equal("0x7bda8b27e891f9687bd6d3312ab3f4f458e2cc91916429d721d617df7ac29fb8"))
-		Expect(dbResult.Oasis).To(Equal(expectedOasisID))
+		Expect(dbResult.Maker).To(Equal(expectedMakerID))
 		Expect(dbResult.PayGem).To(Equal(expectedPayGemID))
 		Expect(dbResult.BuyGem).To(Equal(expectedBuyGemID))
 		Expect(dbResult.PayAmt).To(Equal("3323372775780000000000"))
@@ -138,7 +138,7 @@ var _ = Describe("LogMake Transformer", func() {
 type logMakeModel struct {
 	OfferID   string `db:"offer_id"`
 	Pair      string
-	Oasis     int64
+	Maker     int64
 	PayGem    int64  `db:"pay_gem"`
 	BuyGem    int64  `db:"buy_gem"`
 	PayAmt    string `db:"pay_amt"`

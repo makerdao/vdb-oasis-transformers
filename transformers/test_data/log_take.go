@@ -44,7 +44,7 @@ var (
 		TableName:  constants.LogTakeTable,
 		OrderedColumns: []event.ColumnName{
 			event.HeaderFK, event.LogFK, event.AddressFK, constants.OfferId, constants.PairColumn,
-			constants.OasisColumn, constants.PayGemColumn, constants.BuyGemColumn, constants.TakerColumn,
+			constants.MakerColumn, constants.PayGemColumn, constants.BuyGemColumn, constants.TakerColumn,
 			constants.TakeAmtColumn, constants.GiveAmtColumn, constants.TimestampColumn,
 		},
 		ColumnValues: event.ColumnValues{

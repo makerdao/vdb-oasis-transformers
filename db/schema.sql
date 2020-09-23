@@ -98,7 +98,7 @@ CREATE TABLE oasis.log_bump (
     id integer NOT NULL,
     log_id bigint NOT NULL,
     address_id bigint NOT NULL,
-    oasis bigint NOT NULL,
+    maker bigint NOT NULL,
     pay_gem bigint NOT NULL,
     buy_gem bigint NOT NULL,
     pay_amt numeric,
@@ -272,7 +272,7 @@ CREATE TABLE oasis.log_kill (
     id integer NOT NULL,
     log_id bigint NOT NULL,
     address_id bigint NOT NULL,
-    oasis bigint NOT NULL,
+    maker bigint NOT NULL,
     pay_gem bigint NOT NULL,
     buy_gem bigint NOT NULL,
     pay_amt numeric,
@@ -312,7 +312,7 @@ CREATE TABLE oasis.log_make (
     id integer NOT NULL,
     log_id bigint NOT NULL,
     address_id bigint NOT NULL,
-    oasis bigint NOT NULL,
+    maker bigint NOT NULL,
     pay_gem bigint NOT NULL,
     buy_gem bigint NOT NULL,
     pay_amt numeric,
@@ -452,7 +452,7 @@ CREATE TABLE oasis.log_take (
     id integer NOT NULL,
     log_id bigint NOT NULL,
     address_id bigint NOT NULL,
-    oasis bigint NOT NULL,
+    maker bigint NOT NULL,
     pay_gem bigint NOT NULL,
     buy_gem bigint NOT NULL,
     taker bigint NOT NULL,
@@ -992,10 +992,10 @@ CREATE INDEX log_bump_log_index ON oasis.log_bump USING btree (log_id);
 
 
 --
--- Name: log_bump_oasis_index; Type: INDEX; Schema: oasis; Owner: -
+-- Name: log_bump_maker_index; Type: INDEX; Schema: oasis; Owner: -
 --
 
-CREATE INDEX log_bump_oasis_index ON oasis.log_bump USING btree (oasis);
+CREATE INDEX log_bump_maker_index ON oasis.log_bump USING btree (maker);
 
 
 --
@@ -1132,10 +1132,10 @@ CREATE INDEX log_kill_index ON oasis.log_kill USING btree (log_id);
 
 
 --
--- Name: log_kill_oasis_index; Type: INDEX; Schema: oasis; Owner: -
+-- Name: log_kill_maker_index; Type: INDEX; Schema: oasis; Owner: -
 --
 
-CREATE INDEX log_kill_oasis_index ON oasis.log_kill USING btree (oasis);
+CREATE INDEX log_kill_maker_index ON oasis.log_kill USING btree (maker);
 
 
 --
@@ -1174,10 +1174,10 @@ CREATE INDEX log_make_log_index ON oasis.log_make USING btree (log_id);
 
 
 --
--- Name: log_make_oasis_index; Type: INDEX; Schema: oasis; Owner: -
+-- Name: log_make_maker_index; Type: INDEX; Schema: oasis; Owner: -
 --
 
-CREATE INDEX log_make_oasis_index ON oasis.log_make USING btree (oasis);
+CREATE INDEX log_make_maker_index ON oasis.log_make USING btree (maker);
 
 
 --
@@ -1286,10 +1286,10 @@ CREATE INDEX log_take_log_index ON oasis.log_take USING btree (log_id);
 
 
 --
--- Name: log_take_oasis_index; Type: INDEX; Schema: oasis; Owner: -
+-- Name: log_take_maker_index; Type: INDEX; Schema: oasis; Owner: -
 --
 
-CREATE INDEX log_take_oasis_index ON oasis.log_take USING btree (oasis);
+CREATE INDEX log_take_maker_index ON oasis.log_take USING btree (maker);
 
 
 --
@@ -1438,11 +1438,11 @@ ALTER TABLE ONLY oasis.log_bump
 
 
 --
--- Name: log_bump log_bump_oasis_fkey; Type: FK CONSTRAINT; Schema: oasis; Owner: -
+-- Name: log_bump log_bump_maker_fkey; Type: FK CONSTRAINT; Schema: oasis; Owner: -
 --
 
 ALTER TABLE ONLY oasis.log_bump
-    ADD CONSTRAINT log_bump_oasis_fkey FOREIGN KEY (oasis) REFERENCES public.addresses(id) ON DELETE CASCADE;
+    ADD CONSTRAINT log_bump_maker_fkey FOREIGN KEY (maker) REFERENCES public.addresses(id) ON DELETE CASCADE;
 
 
 --
@@ -1598,11 +1598,11 @@ ALTER TABLE ONLY oasis.log_kill
 
 
 --
--- Name: log_kill log_kill_oasis_fkey; Type: FK CONSTRAINT; Schema: oasis; Owner: -
+-- Name: log_kill log_kill_maker_fkey; Type: FK CONSTRAINT; Schema: oasis; Owner: -
 --
 
 ALTER TABLE ONLY oasis.log_kill
-    ADD CONSTRAINT log_kill_oasis_fkey FOREIGN KEY (oasis) REFERENCES public.addresses(id) ON DELETE CASCADE;
+    ADD CONSTRAINT log_kill_maker_fkey FOREIGN KEY (maker) REFERENCES public.addresses(id) ON DELETE CASCADE;
 
 
 --
@@ -1646,11 +1646,11 @@ ALTER TABLE ONLY oasis.log_make
 
 
 --
--- Name: log_make log_make_oasis_fkey; Type: FK CONSTRAINT; Schema: oasis; Owner: -
+-- Name: log_make log_make_maker_fkey; Type: FK CONSTRAINT; Schema: oasis; Owner: -
 --
 
 ALTER TABLE ONLY oasis.log_make
-    ADD CONSTRAINT log_make_oasis_fkey FOREIGN KEY (oasis) REFERENCES public.addresses(id) ON DELETE CASCADE;
+    ADD CONSTRAINT log_make_maker_fkey FOREIGN KEY (maker) REFERENCES public.addresses(id) ON DELETE CASCADE;
 
 
 --
@@ -1774,11 +1774,11 @@ ALTER TABLE ONLY oasis.log_take
 
 
 --
--- Name: log_take log_take_oasis_fkey; Type: FK CONSTRAINT; Schema: oasis; Owner: -
+-- Name: log_take log_take_maker_fkey; Type: FK CONSTRAINT; Schema: oasis; Owner: -
 --
 
 ALTER TABLE ONLY oasis.log_take
-    ADD CONSTRAINT log_take_oasis_fkey FOREIGN KEY (oasis) REFERENCES public.addresses(id) ON DELETE CASCADE;
+    ADD CONSTRAINT log_take_maker_fkey FOREIGN KEY (maker) REFERENCES public.addresses(id) ON DELETE CASCADE;
 
 
 --

@@ -53,7 +53,7 @@ func (t Transformer) ToModels(abi string, logs []core.EventLog, db *postgres.DB)
 			return nil, shared.ErrCouldNotCreateFK(contractAddressErr)
 		}
 
-		oasisAddressID, oasisAddressErr := shared.GetOrCreateAddress(entity.Maker.Hex(), db)
+		makerAddressID, oasisAddressErr := shared.GetOrCreateAddress(entity.Maker.Hex(), db)
 		if oasisAddressErr != nil {
 			return nil, shared.ErrCouldNotCreateFK(oasisAddressErr)
 		}
@@ -79,7 +79,7 @@ func (t Transformer) ToModels(abi string, logs []core.EventLog, db *postgres.DB)
 				event.AddressFK,
 				constants.OfferId,
 				constants.PairColumn,
-				constants.OasisColumn,
+				constants.MakerColumn,
 				constants.PayGemColumn,
 				constants.BuyGemColumn,
 				constants.PayAmtColumn,
@@ -92,7 +92,7 @@ func (t Transformer) ToModels(abi string, logs []core.EventLog, db *postgres.DB)
 				event.AddressFK:           contractAddressId,
 				constants.OfferId:         shared.BigIntToString(offerID),
 				constants.PairColumn:      entity.Pair.Hex(),
-				constants.OasisColumn:     oasisAddressID,
+				constants.MakerColumn:     makerAddressID,
 				constants.PayGemColumn:    payGemAddressId,
 				constants.BuyGemColumn:    buyGemAddressId,
 				constants.PayAmtColumn:    shared.BigIntToString(entity.PayAmt),

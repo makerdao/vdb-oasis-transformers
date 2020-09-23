@@ -31,7 +31,7 @@ var _ = Describe("LogBump Transformer", func() {
 		test_data.AssignAddressID(test_data.LogBumpEventLog, expectedModel, db)
 		makerID, makerErr := shared.GetOrCreateAddress(common.HexToAddress(test_data.LogBumpEventLog.Log.Topics[3].Hex()).Hex(), db)
 		Expect(makerErr).NotTo(HaveOccurred())
-		expectedModel.ColumnValues[constants.OasisColumn] = makerID
+		expectedModel.ColumnValues[constants.MakerColumn] = makerID
 		payGemID, payGemErr := shared.GetOrCreateAddress(test_data.LogBumpPayGemAddress.Hex(), db)
 		Expect(payGemErr).NotTo(HaveOccurred())
 		expectedModel.ColumnValues[constants.PayGemColumn] = payGemID

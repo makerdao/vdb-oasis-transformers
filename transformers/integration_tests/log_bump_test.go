@@ -51,13 +51,13 @@ var _ = Describe("LogBump Transformer", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		var dbResults []logBumpModel
-		err = db.Select(&dbResults, `SELECT offer_id, pair, oasis, pay_gem, buy_gem, pay_amt, buy_amt, timestamp, address_id from oasis.log_bump`)
+		err = db.Select(&dbResults, `SELECT offer_id, pair, maker, pay_gem, buy_gem, pay_amt, buy_amt, timestamp, address_id from oasis.log_bump`)
 		Expect(err).NotTo(HaveOccurred())
 
 		expectedAddressID, addressErr := shared.GetOrCreateAddress(oasisOneAddress, db)
 		Expect(addressErr).NotTo(HaveOccurred())
-		expectedOasisID, oasisErr := shared.GetOrCreateAddress("0xa4da0f347c6abe0e8bc71b5981fd92b364eda4c2", db)
-		Expect(oasisErr).NotTo(HaveOccurred())
+		expectedMakerID, makerErr := shared.GetOrCreateAddress("0xa4da0f347c6abe0e8bc71b5981fd92b364eda4c2", db)
+		Expect(makerErr).NotTo(HaveOccurred())
 		expectedPayGemID, payGemErr := shared.GetOrCreateAddress("0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359", db)
 		Expect(payGemErr).NotTo(HaveOccurred())
 		expectedBuyGemID, buyGemErr := shared.GetOrCreateAddress("0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", db)
@@ -67,7 +67,7 @@ var _ = Describe("LogBump Transformer", func() {
 		dbResult := dbResults[0]
 		Expect(dbResult.OfferID).To(Equal("286499"))
 		Expect(dbResult.Pair).To(Equal("0x10aed75aa327f09ef87e5bdfaedf498ca260499a251ae5e049ddbd5e1633cd9c"))
-		Expect(dbResult.Oasis).To(Equal(expectedOasisID))
+		Expect(dbResult.Maker).To(Equal(expectedMakerID))
 		Expect(dbResult.PayGem).To(Equal(expectedPayGemID))
 		Expect(dbResult.BuyGem).To(Equal(expectedBuyGemID))
 		Expect(dbResult.PayAmt).To(Equal("6153000000000000000"))
@@ -80,7 +80,7 @@ var _ = Describe("LogBump Transformer", func() {
 type logBumpModel struct {
 	OfferID   string `db:"offer_id"`
 	Pair      string
-	Oasis     int64
+	Maker     int64
 	PayGem    int64  `db:"pay_gem"`
 	BuyGem    int64  `db:"buy_gem"`
 	PayAmt    string `db:"pay_amt"`

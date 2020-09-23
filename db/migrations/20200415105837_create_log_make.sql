@@ -4,7 +4,7 @@ CREATE TABLE oasis.log_make
     id         serial primary key,
     log_id     bigint  not null references public.event_logs (id) on delete cascade,
     address_id bigint  not null references public.addresses (id) on delete cascade,
-    oasis      bigint  not null references public.addresses (id) on delete cascade,
+    maker      bigint  not null references public.addresses (id) on delete cascade,
     pay_gem    bigint  not null references public.addresses (id) on delete cascade,
     buy_gem    bigint  not null references public.addresses (id) on delete cascade,
     pay_amt    numeric,
@@ -22,8 +22,8 @@ CREATE INDEX log_make_log_index
     ON oasis.log_make (log_id);
 CREATE INDEX log_make_address_index
     ON oasis.log_make (address_id);
-CREATE INDEX log_make_oasis_index
-    ON oasis.log_make (oasis);
+CREATE INDEX log_make_maker_index
+    ON oasis.log_make (maker);
 CREATE INDEX log_make_pay_gem_index
     ON oasis.log_make (pay_gem);
 CREATE INDEX log_make_buy_gem_index

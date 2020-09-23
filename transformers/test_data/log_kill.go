@@ -48,7 +48,7 @@ var (
 			event.AddressFK,
 			constants.OfferId,
 			constants.PairColumn,
-			constants.OasisColumn,
+			constants.MakerColumn,
 			constants.PayGemColumn,
 			constants.BuyGemColumn,
 			constants.PayAmtColumn,

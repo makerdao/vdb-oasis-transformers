@@ -43,7 +43,7 @@ var (
 		SchemaName: constants.OasisSchema,
 		TableName:  constants.LogBumpTable,
 		OrderedColumns: []event.ColumnName{
-			event.HeaderFK, event.LogFK, event.AddressFK, constants.OfferId, constants.PairColumn, constants.OasisColumn, constants.PayGemColumn,
+			event.HeaderFK, event.LogFK, event.AddressFK, constants.OfferId, constants.PairColumn, constants.MakerColumn, constants.PayGemColumn,
 			constants.BuyGemColumn, constants.PayAmtColumn, constants.BuyAmtColumn, constants.TimestampColumn,
 		},
 		ColumnValues: event.ColumnValues{
