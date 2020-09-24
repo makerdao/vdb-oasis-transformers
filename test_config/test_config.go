@@ -75,7 +75,7 @@ func CleanTestDB(db *postgres.DB) {
 		err := db.Select(&wipeTableQueries,
 			`SELECT 'DELETE FROM ' || schemaname || '.' || relname || ';'
 			FROM pg_stat_user_tables
-			WHERE schemaname IN ('public', 'oasis', 'api')
+			WHERE schemaname IN ('public', 'oasis')
 			AND relname NOT IN ('eth_nodes', 'goose_db_version');`)
 		if err != nil {
 			panic("Failed to generate DB cleaning query: " + err.Error())
