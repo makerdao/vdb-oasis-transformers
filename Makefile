@@ -147,7 +147,7 @@ plugin:
 .PHONY: dockerbuild
 dockerbuild:
 	test -n "$(IMAGE)" # $$IMAGE
-	docker build -t $(IMAGE) -f dockerfiles/$(IMAGE)/Dockerfile .
+	docker build -t vdb-oasis-$(IMAGE) -f dockerfiles/$(IMAGE)/Dockerfile .
 
 .PHONY: execute
 execute: HOST ?= host.docker.internal
@@ -162,4 +162,4 @@ execute:
 		-e "DATABASE_PORT=$(PORT)" \
 		-e "DATABASE_USER=$(USER)" \
 		-e "DATABASE_PASSWORD=$(DATABASE_PASSWORD)" \
-		execute:latest
+		vdb-oasis-execute:latest
