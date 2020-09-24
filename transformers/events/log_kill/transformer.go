@@ -53,9 +53,9 @@ func (t Transformer) ToModels(abi string, logs []core.EventLog, db *postgres.DB)
 			return nil, shared.ErrCouldNotCreateFK(contractAddressErr)
 		}
 
-		makerAddressID, oasisAddressErr := shared.GetOrCreateAddress(entity.Maker.Hex(), db)
-		if oasisAddressErr != nil {
-			return nil, shared.ErrCouldNotCreateFK(oasisAddressErr)
+		makerAddressID, makerAddressErr := shared.GetOrCreateAddress(entity.Maker.Hex(), db)
+		if makerAddressErr != nil {
+			return nil, shared.ErrCouldNotCreateFK(makerAddressErr)
 		}
 
 		payGemAddressId, payGemAddressErr := shared.GetOrCreateAddress(entity.PayGem.Hex(), db)
