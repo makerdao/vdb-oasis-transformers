@@ -19,7 +19,7 @@ This repository is a collection of transformers to be used along with VDB as a p
 
 #### Dependencies
  - Ethereum Node
-   - Use the patched version of [Go Ethereum](https://github.com/makerdao/go-ethereum) (1.9.23+) in order to have access to storage transformers and diffs.
+   - Use the patched version of [Go Ethereum](https://github.com/makerdao/go-ethereum) (1.9.21+) in order to have access to storage transformers and diffs.
    - [Parity 1.8.11+](https://github.com/paritytech/parity/releases)
  - [VulcanizeDB](https://github.com/makerdao/vulcanizedb)
  - Go 1.12+
