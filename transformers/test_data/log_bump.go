@@ -52,7 +52,7 @@ var (
 			// Oasis contract address id
 			constants.OfferId:    "286499",
 			constants.PairColumn: "0x10aed75aa327f09ef87e5bdfaedf498ca260499a251ae5e049ddbd5e1633cd9c",
-			// Oasis address id
+			// Maker address id
 			// Pay gem address id
 			// Buy gem address id
 			constants.PayAmtColumn:    "6153000000000000000",

@@ -58,10 +58,10 @@ var (
 		ColumnValues: event.ColumnValues{
 			event.HeaderFK: LogKillEventLog.HeaderID,
 			event.LogFK:    LogKillEventLog.ID,
-			// Oasis address
+			// Address ID
 			constants.OfferId:    "604350",
 			constants.PairColumn: "0xd257ccbe93e550a27236e8cc4971336f6cd2d53037ad567f10fbcc28df6a1eb1",
-			// Oasis address
+			// Maker address
 			// PayGem address
 			// BuyGem address
 			constants.PayAmtColumn:    "2000000000000000000",
