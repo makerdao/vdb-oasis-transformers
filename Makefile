@@ -154,6 +154,7 @@ execute: HOST ?= host.docker.internal
 execute: DATABASE_PASSWORD ?= postgres
 execute:
 	test -n "$(NAME)" # $$(NAME) - Database Name
+	test -n "$(CLIENT_IPCPATH)" # $$(CLIENT_IPCPATH) - Node path
 	docker run \
 		-it \
 		-p "5432:5432" \
@@ -162,4 +163,5 @@ execute:
 		-e "DATABASE_PORT=$(PORT)" \
 		-e "DATABASE_USER=$(USER)" \
 		-e "DATABASE_PASSWORD=$(DATABASE_PASSWORD)" \
+		-e "CLIENT_IPCPATH=$(CLIENT_IPCPATH)" \
 		vdb-oasis-execute:latest
