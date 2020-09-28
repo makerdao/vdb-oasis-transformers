@@ -147,7 +147,7 @@ plugin:
 .PHONY: dockerbuild
 dockerbuild:
 	test -n "$(IMAGE)" # $$IMAGE
-	docker build -t vdb-oasis-$(IMAGE) -f dockerfiles/$(IMAGE)/Dockerfile .
+	docker build --no-cache -t vdb-oasis-$(IMAGE) -f dockerfiles/$(IMAGE)/Dockerfile .
 
 .PHONY: execute
 execute: HOST ?= host.docker.internal
