@@ -15,6 +15,7 @@
     home     = "github.com/makerdao/vulcanizedb"
     name     = "transformerExporter"
     save     = true
+    schema   = "oasis"
     transformerNames = [
         "log_bump",
         "log_buy_enabled",

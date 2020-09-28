@@ -1,6 +1,7 @@
 [exporter]
     home     = "github.com/makerdao/vulcanizedb"
     name     = "transformerExporter"
+    schema   = "oasis"
     save     = false
     transformerNames = [
         "log_bump",
