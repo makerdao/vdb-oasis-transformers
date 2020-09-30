@@ -157,7 +157,7 @@ execute:
 	test -n "$(CLIENT_IPCPATH)" # $$(CLIENT_IPCPATH) - Node path
 	docker run \
 		-it \
-		-p "5432:5432" \
+		-p "$(PORT):$(PORT)" \
 		-e "DATABASE_NAME=$(NAME)" \
 		-e "DATABASE_HOSTNAME=$(HOST)" \
 		-e "DATABASE_PORT=$(PORT)" \
