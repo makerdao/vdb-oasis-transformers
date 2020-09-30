@@ -70,7 +70,7 @@ docker run -e DATABASE_USER=<user> -e DATABASE_PASSWORD=<pw> -e DATABASE_HOSTNAM
   - when running on MacOSX use `host.docker.internal` as the `DATABASE_HOSTNAME` and as the host in the `CLIENT_IPCPATH`
 
 #### Running `execute`
-`execute` Docker images are located in the [MakerDao Dockerhub organization](https://hub.docker.com/repository/docker/makerdao/vdb-execute). See the [Docker README](./dockerfiles/README.md) for further information.
+`execute` Docker images are located in the [MakerDao Dockerhub organization](https://hub.docker.com/repository/docker/makerdao/vdb-oasis-execute). See the [Docker README](./dockerfiles/README.md) for further information.
 
 ### With the CLI
 
