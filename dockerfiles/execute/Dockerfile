@@ -36,6 +36,7 @@ RUN apt-get update \
         ca-certificates \
         postgresql-client \
         bash \
+        busybox \
         && update-ca-certificates 2>/dev/null || true
 
 ARG CONFIG_FILE=environments/docker.toml
