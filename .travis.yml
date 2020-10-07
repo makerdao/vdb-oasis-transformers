@@ -21,12 +21,8 @@ script:
 - env GO111MODULE=on make integrationtest
 deploy:
 - provider: script
-  script: bash ./.travis/deploy.sh staging
-  on:
-    branch: beta
-- provider: script
   script: bash ./.travis/deploy.sh prod
   on:
-    branch: prod
+    branch: main
 notifications:
   email: false
