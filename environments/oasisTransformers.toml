@@ -1,16 +1,3 @@
-[database]
-    name     = "vulcanize_public"
-    hostname = "localhost"
-    user     = "vulcanize"
-    password = "vulcanize"
-    port     = 5432
-
-[client]
-    ipcPath = ""
-
-[filesystem]
-    storageDiffsPath = "INSERT-PATH-TO-STORAGE-DIFFS"
-
 [exporter]
     home     = "github.com/makerdao/vulcanizedb"
     name     = "transformerExporter"

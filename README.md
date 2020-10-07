@@ -53,7 +53,7 @@ In some cases (such as recent Ubuntu systems), it may be necessary to overcome f
 
 ### Running With Docker
 
-The execute Docker image is most easily run locally with the make tasks `dockerbuild` and `execute` where `make dockerbuild IMAGE=execute` will build the image and `make execute DATABASE_NAME=<name>`. If postgres is not running locally or is using different parameters than the default, they can be changed with environment variables. See the Makefile for more information.
+The execute Docker image is most easily run locally with the make tasks `dockerbuild` and `execute` where `make dockerbuild IMAGE=execute` will build the image and `make execute DATABASE_NAME=<name> CLIENT_IPCPATH=<geth-endpoint-url>`. If postgres is not running locally or is using different parameters than the default, they can be changed with environment variables. See the Makefile for more information.
 
 The Makefile variation is not intended for production use.
 
@@ -118,9 +118,7 @@ shell's `$PATH`.
 [Postgraphile](https://www.graphile.org/postgraphile/) is used to expose GraphQL endpoints for our database schemas, this is described in detail [here](https://github.com/makerdao/vulcanizedb/blob/staging/documentation/postgraphile.md).
 
 ### Tests
-- Set the ipc path to a Kovan node either by:
-    - replacing the empty `ipcPath` in the `environments/testing.toml` with a path to a full node's eth_jsonrpc endpoint (e.g. local geth node ipc path or infura url)
-    - Or, setting the CLIENT_IPCPATH environment variable
+- Set the ipc path to a Kovan node by setting the CLIENT_IPCPATH environment variable
 - `make test` will run the unit tests and skip the integration tests
 - `make integrationtest` will run just the integration tests
 - `make test` and `make integrationtest` setup a clean `vulcanize_testing` db
