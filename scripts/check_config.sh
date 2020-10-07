@@ -4,7 +4,7 @@ REPOPATH=$PWD
 exporterFile=$REPOPATH'/plugins/execute/transformerExporter.go'
 exportedTransformers=( $( sed -n '/vdb-oasis/p' $exporterFile | cut -d' ' -f 1 | sort ) )
 
-configFile=$REPOPATH'/environments/docker.toml'
+configFile=$REPOPATH'/environments/oasisTransformers.toml'
 configTransformers=( $(sed -n "/exporter\..*/p" $configFile | awk -F "." '{print $2}' | tr -d "]" | sort ) )
 
 if [ ${#exportedTransformers[@]} != ${#configTransformers[@]} ]; then

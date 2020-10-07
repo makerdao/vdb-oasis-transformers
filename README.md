@@ -38,9 +38,9 @@ Download the transformer codebase to your local local `GOPATH` via: `go get gith
 
 As mentioned above this repository is a plugin for VulcanizeDB.  As such it cannot be run as a standalone executable, but instead is intended to be included as part of a VulcanizeDB core command. There are two VulcanizeDB core commands that are required for events and storage slots to be transformed and persisted to the Postgres database.
 
-1. `headerSync` fetches raw Ethereum data and syncs it into VulcanizeDB's Postgres database where then it can be used for transformations. More information about the `headerSync` command can be found in the [VulcanizeDB repository](https://github.com/makerdao/vulcanizedb/blob/staging/documentation/data-syncing.md#headersync).
+1. `headerSync` fetches raw Ethereum data and syncs it into VulcanizeDB's Postgres database where then it can be used for transformations. More information about the `headerSync` command can be found in the [VulcanizeDB repository](https://github.com/makerdao/vulcanizedb/blob/prod/documentation/data-syncing.md#headersync).
 
-1. `execute` uses the raw Ethereum data that has been synced into Postgres and applies transformations to configured Oasis contract data via [event](./transformers/events) and [storage](./transformers/storage) transformers. The VulcanizeDB repository includes a [general description](https://github.com/makerdao/vulcanizedb/blob/staging/documentation/custom-transformers.md) about transformers.
+1. `execute` uses the raw Ethereum data that has been synced into Postgres and applies transformations to configured Oasis contract data via [event](./transformers/events) and [storage](./transformers/storage) transformers. The VulcanizeDB repository includes a [general description](https://github.com/makerdao/vulcanizedb/blob/prod/documentation/custom-transformers.md) about transformers.
 
 The core commands can also be run via images or built and run via the command line interface. In either method, a postgres database will first need to be created:
 1. Install Postgres
@@ -53,7 +53,7 @@ In some cases (such as recent Ubuntu systems), it may be necessary to overcome f
 
 ### Running With Docker
 
-The execute Docker image is most easily run locally with the make tasks `dockerbuild` and `execute` where `make dockerbuild IMAGE=execute` will build the image and `make execute DATABASE_NAME=<name>`. If postgres is not running locally or is using different parameters than the default, they can be changed with environment variables. See the Makefile for more information.
+The execute Docker image is most easily run locally with the make tasks `dockerbuild` and `execute` where `make dockerbuild IMAGE=execute` will build the image and `make execute DATABASE_NAME=<name> CLIENT_IPCPATH=<geth-endpoint-url>`. If postgres is not running locally or is using different parameters than the default, they can be changed with environment variables. See the Makefile for more information.
 
 The Makefile variation is not intended for production use.
 
@@ -70,7 +70,7 @@ docker run -e DATABASE_USER=<user> -e DATABASE_PASSWORD=<pw> -e DATABASE_HOSTNAM
   - when running on MacOSX use `host.docker.internal` as the `DATABASE_HOSTNAME` and as the host in the `CLIENT_IPCPATH`
 
 #### Running `execute`
-`execute` Docker images are located in the [MakerDao Dockerhub organization](https://hub.docker.com/repository/docker/makerdao/vdb-execute). See the [Docker README](./dockerfiles/README.md) for further information.
+`execute` Docker images are located in the [MakerDao Dockerhub organization](https://hub.docker.com/repository/docker/makerdao/vdb-oasis-execute). See the [Docker README](./dockerfiles/README.md) for further information.
 
 ### With the CLI
 
@@ -85,7 +85,7 @@ docker run -e DATABASE_USER=<user> -e DATABASE_PASSWORD=<pw> -e DATABASE_HOSTNAM
 ./vulcanizedb headerSync --config <config.toml> --starting-block-number <block-number>
 ```
 
-For more information, see the [VulcanizeDB data-syncing documentation](https://github.com/makerdao/vulcanizedb/blob/staging/documentation/data-syncing.md).
+For more information, see the [VulcanizeDB data-syncing documentation](https://github.com/makerdao/vulcanizedb/blob/prod/documentation/data-syncing.md).
 
 #### Running `execute`
 
@@ -104,7 +104,7 @@ the [most recent vdb-oasis-transformers release](https://github.com/makerdao/vdb
 the `vdb-oasis-transformers` [go.mod](./go.mod) file to see what `vulcanizedb` version is expects.
 - Make sure that the transformers in the config file you're using match up with the ones included in the release.
 - The dependencies between the two repositories need to be in sync, otherwise the plugins will not be able to be composed properly.
-There is a [script](https://github.com/makerdao/vulcanizedb/blob/staging/scripts/gomoderator.py) in the VulcanizeDB
+There is a [script](https://github.com/makerdao/vulcanizedb/blob/prod/scripts/gomoderator.py) in the VulcanizeDB
 repository to take care of this. This mismatch of dependencies versions should not happen if two compatible releases are
 used, but is possible in development.
 - If you need to use a different dependency than what is currently defined in `go.mod` in either repository, it may be
@@ -115,12 +115,10 @@ This instruction enables you to point at a fork or the local filesystem for depe
 shell's `$PATH`.
 
 ### Exposing the data
-[Postgraphile](https://www.graphile.org/postgraphile/) is used to expose GraphQL endpoints for our database schemas, this is described in detail [here](https://github.com/makerdao/vulcanizedb/blob/staging/documentation/postgraphile.md).
+[Postgraphile](https://www.graphile.org/postgraphile/) is used to expose GraphQL endpoints for our database schemas, this is described in detail [here](https://github.com/makerdao/vulcanizedb/blob/prod/documentation/postgraphile.md).
 
 ### Tests
-- Set the ipc path to a Kovan node either by:
-    - replacing the empty `ipcPath` in the `environments/testing.toml` with a path to a full node's eth_jsonrpc endpoint (e.g. local geth node ipc path or infura url)
-    - Or, setting the CLIENT_IPCPATH environment variable
+- Set the ipc path to a Kovan node by setting the CLIENT_IPCPATH environment variable
 - `make test` will run the unit tests and skip the integration tests
 - `make integrationtest` will run just the integration tests
 - `make test` and `make integrationtest` setup a clean `vulcanize_testing` db
@@ -130,7 +128,7 @@ Contributions are welcome!
 
 VulcanizeDB follows the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/1/4/code-of-conduct).
 
-For more information on contributing, please see [here](https://github.com/makerdao/vulcanizedb/blob/staging/documentation/contributing.md).
+For more information on contributing, please see [here](https://github.com/makerdao/vulcanizedb/blob/prod/documentation/contributing.md).
 
 ## License
 [AGPL-3.0](LICENSE) © Vulcanize Inc

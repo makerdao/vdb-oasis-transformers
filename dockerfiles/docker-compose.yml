@@ -1,0 +1,67 @@
+
+# This composition runs a full vdb instance with automatic service restarts,
+# configured with a CLIENT_IPCPATH.
+#
+# When running you can access:
+# postgres   @ localhost:5432
+# graph(i)ql @ localhost:5000
+#
+# The client and database service stores the data on the *host* machine in a docker volume.
+# This means that if the cluster is gracefully stopped, it can be restarted again
+# without data loss.
+#
+# Commands:
+# To start the cluster: `> CLIENT_IPCPATH=<node_path> docker-compose up`
+# To stop the cluster, just `ctrl+c` (once, to allow a graceful exit)
+# To reset the cluster: `docker-compose down --volumes` (after stopping the cluster)
+
+version: "3.7"
+services:
+  header-sync:
+    image: makerdao/vdb-headersync:latest # (needs wait-for-it.sh)
+    environment:
+      - CLIENT_IPCPATH=${CLIENT_IPCPATH}
+      - DATABASE_NAME=vdb
+      - DATABASE_HOSTNAME=db
+      - DATABASE_PORT=5432
+      - DATABASE_USER=vdb
+      - DATABASE_PASSWORD=vdb
+      - STARTING_BLOCK_NUMBER=8928152
+    depends_on:
+      - db
+    command: ["./wait-for-it.sh", "db:5432", "--strict", "--", "./startup_script.sh"]
+    restart: unless-stopped
+
+  execute:
+    image: makerdao/vdb-oasis-execute:latest # (needs wait-for-it.sh)
+    environment:
+      - CLIENT_IPCPATH=${CLIENT_IPCPATH}
+      - DATABASE_NAME=vdb
+      - DATABASE_HOSTNAME=db
+      - DATABASE_PORT=5432
+      - DATABASE_USER=vdb
+      - DATABASE_PASSWORD=vdb
+    depends_on:
+      - db
+    command: ["./wait-for-it.sh", "db:5432", "--strict", "--", "./startup_script.sh"]
+    restart: unless-stopped
+
+  db:
+    image: postgres:12.1-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=vdb
+      - POSTGRES_PASSWORD=vdb
+    restart: always
+
+  postgraphile:
+    image: makerdao/vdb-postgraphile
+    ports:
+      - 5000:5000
+    environment:
+      - SCHEMAS=api,maker,public
+      - DATABASE_URL=postgres://vdb:vdb@db:5432/vdb
+    depends_on:
+      - db
+    restart: always
