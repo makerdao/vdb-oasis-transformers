@@ -60,7 +60,7 @@ services:
     ports:
       - 5000:5000
     environment:
-      - SCHEMAS=api,maker,public
+      - SCHEMAS=public,oasis
       - DATABASE_URL=postgres://vdb:vdb@db:5432/vdb
     depends_on:
       - db
