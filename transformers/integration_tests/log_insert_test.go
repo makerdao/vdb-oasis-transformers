@@ -4,11 +4,11 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/makerdao/vdb-oasis-transformers/test_config"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/events/log_insert"
-	"github.com/makerdao/vdb-oasis-transformers/transformers/shared"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/test_data"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
 	"github.com/makerdao/vulcanizedb/libraries/shared/fetcher"
+	"github.com/makerdao/vulcanizedb/libraries/shared/repository"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
@@ -54,9 +54,9 @@ var _ = Describe("LogInsert Transformer", func() {
 		err = db.Select(&dbResults, `SELECT address_id, keeper, offer_id from oasis.log_insert`)
 		Expect(err).NotTo(HaveOccurred())
 
-		expectedAddressID, addressErr := shared.GetOrCreateAddress(oasisOneAddress, db)
+		expectedAddressID, addressErr := repository.GetOrCreateAddress(db, oasisOneAddress)
 		Expect(addressErr).NotTo(HaveOccurred())
-		expectedKeeperID, keeperErr := shared.GetOrCreateAddress("0x3a32292c53bf42b6317334392bf0272da2983252", db)
+		expectedKeeperID, keeperErr := repository.GetOrCreateAddress(db, "0x3a32292c53bf42b6317334392bf0272da2983252")
 		Expect(keeperErr).NotTo(HaveOccurred())
 
 		Expect(len(dbResults)).To(Equal(1))

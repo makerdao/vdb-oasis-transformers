@@ -4,11 +4,11 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/makerdao/vdb-oasis-transformers/test_config"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/events/log_bump"
-	"github.com/makerdao/vdb-oasis-transformers/transformers/shared"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/test_data"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
 	"github.com/makerdao/vulcanizedb/libraries/shared/fetcher"
+	"github.com/makerdao/vulcanizedb/libraries/shared/repository"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
@@ -54,13 +54,13 @@ var _ = Describe("LogBump Transformer", func() {
 		err = db.Select(&dbResults, `SELECT offer_id, pair, maker, pay_gem, buy_gem, pay_amt, buy_amt, timestamp, address_id from oasis.log_bump`)
 		Expect(err).NotTo(HaveOccurred())
 
-		expectedAddressID, addressErr := shared.GetOrCreateAddress(oasisOneAddress, db)
+		expectedAddressID, addressErr := repository.GetOrCreateAddress(db, oasisOneAddress)
 		Expect(addressErr).NotTo(HaveOccurred())
-		expectedMakerID, makerErr := shared.GetOrCreateAddress("0xa4da0f347c6abe0e8bc71b5981fd92b364eda4c2", db)
+		expectedMakerID, makerErr := repository.GetOrCreateAddress(db, "0xa4da0f347c6abe0e8bc71b5981fd92b364eda4c2")
 		Expect(makerErr).NotTo(HaveOccurred())
-		expectedPayGemID, payGemErr := shared.GetOrCreateAddress("0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359", db)
+		expectedPayGemID, payGemErr := repository.GetOrCreateAddress(db, "0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359")
 		Expect(payGemErr).NotTo(HaveOccurred())
-		expectedBuyGemID, buyGemErr := shared.GetOrCreateAddress("0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", db)
+		expectedBuyGemID, buyGemErr := repository.GetOrCreateAddress(db, "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2")
 		Expect(buyGemErr).NotTo(HaveOccurred())
 
 		Expect(len(dbResults)).To(Equal(1))

@@ -6,11 +6,11 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/makerdao/vdb-oasis-transformers/test_config"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/events/log_make"
-	"github.com/makerdao/vdb-oasis-transformers/transformers/shared"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/test_data"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
 	"github.com/makerdao/vulcanizedb/libraries/shared/fetcher"
+	"github.com/makerdao/vulcanizedb/libraries/shared/repository"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
@@ -56,13 +56,13 @@ var _ = Describe("LogMake Transformer", func() {
 		err = db.Select(&dbResults, `SELECT offer_id, pair, maker, pay_gem, buy_gem, pay_amt, buy_amt, timestamp, address_id from oasis.log_make`)
 		Expect(err).NotTo(HaveOccurred())
 
-		expectedAddressID, addressErr := shared.GetOrCreateAddress(oasisOneAddress, db)
+		expectedAddressID, addressErr := repository.GetOrCreateAddress(db, oasisOneAddress)
 		Expect(addressErr).NotTo(HaveOccurred())
-		expectedMakerID, makerErr := shared.GetOrCreateAddress("0x6Ff7D252627D35B8eb02607c8F27ACDB18032718", db)
+		expectedMakerID, makerErr := repository.GetOrCreateAddress(db, "0x6Ff7D252627D35B8eb02607c8F27ACDB18032718")
 		Expect(makerErr).NotTo(HaveOccurred())
-		expectedPayGemID, payGemErr := shared.GetOrCreateAddress("0x6B175474E89094C44Da98b954EedeAC495271d0F", db)
+		expectedPayGemID, payGemErr := repository.GetOrCreateAddress(db, "0x6B175474E89094C44Da98b954EedeAC495271d0F")
 		Expect(payGemErr).NotTo(HaveOccurred())
-		expectedBuyGemID, buyGemErr := shared.GetOrCreateAddress("0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", db)
+		expectedBuyGemID, buyGemErr := repository.GetOrCreateAddress(db, "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2")
 		Expect(buyGemErr).NotTo(HaveOccurred())
 
 		Expect(len(dbResults)).To(Equal(2))
@@ -114,13 +114,13 @@ var _ = Describe("LogMake Transformer", func() {
 
 		Expect(len(dbResults)).To(Equal(1))
 		dbResult := dbResults[0]
-		expectedAddressID, addressErr := shared.GetOrCreateAddress(oasisTwoAddress, db)
+		expectedAddressID, addressErr := repository.GetOrCreateAddress(db, oasisTwoAddress)
 		Expect(addressErr).NotTo(HaveOccurred())
-		expectedMakerID, makerErr := shared.GetOrCreateAddress("0xbAEaFc49d8e3a636d61df1F14fd45b97c7018020", db)
+		expectedMakerID, makerErr := repository.GetOrCreateAddress(db, "0xbAEaFc49d8e3a636d61df1F14fd45b97c7018020")
 		Expect(makerErr).NotTo(HaveOccurred())
-		expectedPayGemID, payGemErr := shared.GetOrCreateAddress("0x6B175474E89094C44Da98b954EedeAC495271d0F", db)
+		expectedPayGemID, payGemErr := repository.GetOrCreateAddress(db, "0x6B175474E89094C44Da98b954EedeAC495271d0F")
 		Expect(payGemErr).NotTo(HaveOccurred())
-		expectedBuyGemID, buyGemErr := shared.GetOrCreateAddress("0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", db)
+		expectedBuyGemID, buyGemErr := repository.GetOrCreateAddress(db, "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2")
 		Expect(buyGemErr).NotTo(HaveOccurred())
 
 		Expect(dbResult.OfferID).To(Equal("247773"))

@@ -3,10 +3,10 @@ package log_kill_test
 import (
 	"github.com/makerdao/vdb-oasis-transformers/test_config"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/events/log_kill"
-	"github.com/makerdao/vdb-oasis-transformers/transformers/shared"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/test_data"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
+	"github.com/makerdao/vulcanizedb/libraries/shared/repository"
 	"github.com/makerdao/vulcanizedb/pkg/core"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -28,11 +28,11 @@ var _ = Describe("LogKill Transformer", func() {
 
 		expectedModel := test_data.LogKillModel()
 		test_data.AssignAddressID(test_data.LogKillEventLog, expectedModel, db)
-		makerAddressId, makerAddressErr := shared.GetOrCreateAddress(test_data.LogKillEventLog.Log.Topics[3].Hex(), db)
+		makerAddressId, makerAddressErr := repository.GetOrCreateAddress(db, test_data.LogKillEventLog.Log.Topics[3].Hex())
 		Expect(makerAddressErr).NotTo(HaveOccurred())
-		payGemAddressId, payGemAddressErr := shared.GetOrCreateAddress(test_data.PayGemAddress.Hex(), db)
+		payGemAddressId, payGemAddressErr := repository.GetOrCreateAddress(db, test_data.PayGemAddress.Hex())
 		Expect(payGemAddressErr).NotTo(HaveOccurred())
-		buyGemAddressId, buyGemAddressErr := shared.GetOrCreateAddress(test_data.BuyGemAddress.Hex(), db)
+		buyGemAddressId, buyGemAddressErr := repository.GetOrCreateAddress(db, test_data.BuyGemAddress.Hex())
 		Expect(buyGemAddressErr).NotTo(HaveOccurred())
 
 		expectedModel.ColumnValues[constants.MakerColumn] = makerAddressId

@@ -7,6 +7,7 @@ import (
 	"github.com/makerdao/vdb-oasis-transformers/transformers/shared"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
+	"github.com/makerdao/vulcanizedb/libraries/shared/repository"
 	"github.com/makerdao/vulcanizedb/pkg/core"
 	"github.com/makerdao/vulcanizedb/pkg/datastore/postgres"
 	"github.com/makerdao/vulcanizedb/pkg/eth"
@@ -47,11 +48,11 @@ func (t Transformer) ToModels(abi string, logs []core.EventLog, db *postgres.DB)
 	}
 	var models []event.InsertionModel
 	for _, entity := range entities {
-		keeperID, keeperErr := shared.GetOrCreateAddress(entity.Keeper.Hex(), db)
+		keeperID, keeperErr := repository.GetOrCreateAddress(db, entity.Keeper.Hex())
 		if keeperErr != nil {
 			return nil, shared.ErrCouldNotCreateFK(keeperErr)
 		}
-		addressID, addressErr := shared.GetOrCreateAddress(entity.ContractAddress.Hex(), db)
+		addressID, addressErr := repository.GetOrCreateAddress(db, entity.ContractAddress.Hex())
 		if addressErr != nil {
 			return nil, shared.ErrCouldNotCreateFK(addressErr)
 		}

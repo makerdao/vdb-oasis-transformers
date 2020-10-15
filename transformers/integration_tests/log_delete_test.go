@@ -4,10 +4,10 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/makerdao/vdb-oasis-transformers/test_config"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/events/log_delete"
-	"github.com/makerdao/vdb-oasis-transformers/transformers/shared"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/test_data"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
+	"github.com/makerdao/vulcanizedb/libraries/shared/repository"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
@@ -47,7 +47,7 @@ var _ = XDescribe("LogSortedOffer Transformer", func() {
 		err = db.Get(&dbResult, `SELECT keeper, offer_id FROM oasis.log_delete`)
 		Expect(err).NotTo(HaveOccurred())
 
-		keeperID, keeperErr := shared.GetOrCreateAddress(test_data.LogDeleteKeeperAddress.Hex(), db)
+		keeperID, keeperErr := repository.GetOrCreateAddress(db, test_data.LogDeleteKeeperAddress.Hex())
 		Expect(keeperErr).NotTo(HaveOccurred())
 
 		Expect(dbResult.Keeper).To(Equal(keeperID))
