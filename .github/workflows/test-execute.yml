@@ -19,6 +19,7 @@ jobs:
         name: Build execute image
         uses: docker/build-push-action@v2
         with:
+          context: .
           file: ./dockerfiles/execute/Dockerfile
           push: false
           tags: makerdao/execute:gh_actions_test_version
