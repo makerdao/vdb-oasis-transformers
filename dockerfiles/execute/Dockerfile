@@ -54,7 +54,7 @@ COPY --from=builder /go/bin/goose goose
 COPY --from=builder /go/src/github.com/makerdao/vdb-oasis-transformers/dockerfiles/wait-for-it.sh .
 COPY --from=builder /go/src/github.com/makerdao/vdb-oasis-transformers/dockerfiles/execute/run_migrations.sh .
 
-HEALTHCHECK CMD grep -q "event watcher starting" /tmp/execute_health_check && grep -q "storage watcher starting" /tmp/execute_health_check
+HEALTHCHECK CMD grep -q "event watcher starting" /tmp/execute_health_check 
 
 # need to execute with a shell to access env variables
 CMD ["./startup_script.sh"]
