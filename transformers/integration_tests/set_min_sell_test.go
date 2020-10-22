@@ -6,11 +6,11 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/makerdao/vdb-oasis-transformers/test_config"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/events/set_min_sell"
-	"github.com/makerdao/vdb-oasis-transformers/transformers/shared"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/test_data"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
 	"github.com/makerdao/vulcanizedb/libraries/shared/fetcher"
+	"github.com/makerdao/vulcanizedb/libraries/shared/repository"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
@@ -56,11 +56,11 @@ var _ = Describe("SetMinSell Transformer", func() {
 		err = db.Select(&dbResults, `SELECT pay_gem, dust, msg_sender, address_id from oasis.set_min_sell`)
 		Expect(err).NotTo(HaveOccurred())
 
-		expectedAddressID, addressErr := shared.GetOrCreateAddress(oasis_one_address, db)
+		expectedAddressID, addressErr := repository.GetOrCreateAddress(db, oasis_one_address)
 		Expect(addressErr).NotTo(HaveOccurred())
-		expectedPayGemID, payGemErr := shared.GetOrCreateAddress("0x6B175474E89094C44Da98b954EedeAC495271d0F", db)
+		expectedPayGemID, payGemErr := repository.GetOrCreateAddress(db, "0x6B175474E89094C44Da98b954EedeAC495271d0F")
 		Expect(payGemErr).NotTo(HaveOccurred())
-		expectedMsgSenderID, msgSenderErr := shared.GetOrCreateAddress("0xdb33dfd3d61308c33c63209845dad3e6bfb2c674", db)
+		expectedMsgSenderID, msgSenderErr := repository.GetOrCreateAddress(db, "0xdb33dfd3d61308c33c63209845dad3e6bfb2c674")
 		Expect(msgSenderErr).NotTo(HaveOccurred())
 
 		Expect(len(dbResults)).To(Equal(1))
@@ -104,11 +104,11 @@ var _ = Describe("SetMinSell Transformer", func() {
 		err = db.Select(&dbResults, `SELECT pay_gem, dust, msg_sender, address_id from oasis.set_min_sell`)
 		Expect(err).NotTo(HaveOccurred())
 
-		expectedAddressID, addressErr := shared.GetOrCreateAddress(oasis_two_address, db)
+		expectedAddressID, addressErr := repository.GetOrCreateAddress(db, oasis_two_address)
 		Expect(addressErr).NotTo(HaveOccurred())
-		expectedPayGemID, payGemErr := shared.GetOrCreateAddress("0x2260fac5e5542a773aa44fbcfedf7c193bc2c599", db)
+		expectedPayGemID, payGemErr := repository.GetOrCreateAddress(db, "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599")
 		Expect(payGemErr).NotTo(HaveOccurred())
-		expectedMsgSenderID, msgSenderErr := shared.GetOrCreateAddress("0xdb33dfd3d61308c33c63209845dad3e6bfb2c674", db)
+		expectedMsgSenderID, msgSenderErr := repository.GetOrCreateAddress(db, "0xdb33dfd3d61308c33c63209845dad3e6bfb2c674")
 		Expect(msgSenderErr).NotTo(HaveOccurred())
 
 		Expect(len(dbResults)).To(Equal(2))

@@ -3,10 +3,10 @@ package set_min_sell_test
 import (
 	"github.com/makerdao/vdb-oasis-transformers/test_config"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/events/set_min_sell"
-	"github.com/makerdao/vdb-oasis-transformers/transformers/shared"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/test_data"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
+	"github.com/makerdao/vulcanizedb/libraries/shared/repository"
 	"github.com/makerdao/vulcanizedb/pkg/core"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -30,7 +30,7 @@ var _ = Describe("SetMinSell Note Transformer", func() {
 		test_data.AssignAddressID(test_data.SetMinSellEventLog, expectedModel, db)
 		test_data.AssignMessageSenderID(test_data.SetMinSellEventLog, expectedModel, db)
 
-		payGemID, payGemErr := shared.GetOrCreateAddress(test_data.SetMinSellPayGemAddress.Hex(), db)
+		payGemID, payGemErr := repository.GetOrCreateAddress(db, test_data.SetMinSellPayGemAddress.Hex())
 		Expect(payGemErr).NotTo(HaveOccurred())
 		expectedModel.ColumnValues[constants.PayGemColumn] = payGemID
 

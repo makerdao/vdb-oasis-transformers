@@ -4,11 +4,11 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/makerdao/vdb-oasis-transformers/test_config"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/events/log_take"
-	"github.com/makerdao/vdb-oasis-transformers/transformers/shared"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/test_data"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
 	"github.com/makerdao/vulcanizedb/libraries/shared/fetcher"
+	"github.com/makerdao/vulcanizedb/libraries/shared/repository"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
@@ -54,15 +54,15 @@ var _ = Describe("LogTake Transformer", func() {
 		err = db.Select(&dbResults, `SELECT offer_id, pair, maker, pay_gem, buy_gem, taker, take_amt, give_amt, timestamp, address_id from oasis.log_take`)
 		Expect(err).NotTo(HaveOccurred())
 
-		expectedAddressID, addressErr := shared.GetOrCreateAddress(oasisOneAddress, db)
+		expectedAddressID, addressErr := repository.GetOrCreateAddress(db, oasisOneAddress)
 		Expect(addressErr).NotTo(HaveOccurred())
-		expectedMakerID, makerErr := shared.GetOrCreateAddress("0x6ff7d252627d35b8eb02607c8f27acdb18032718", db)
+		expectedMakerID, makerErr := repository.GetOrCreateAddress(db, "0x6ff7d252627d35b8eb02607c8f27acdb18032718")
 		Expect(makerErr).NotTo(HaveOccurred())
-		expectedPayGemID, payGemErr := shared.GetOrCreateAddress("0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", db)
+		expectedPayGemID, payGemErr := repository.GetOrCreateAddress(db, "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2")
 		Expect(payGemErr).NotTo(HaveOccurred())
-		expectedBuyGemID, buyGemErr := shared.GetOrCreateAddress("0x6b175474e89094c44da98b954eedeac495271d0f", db)
+		expectedBuyGemID, buyGemErr := repository.GetOrCreateAddress(db, "0x6b175474e89094c44da98b954eedeac495271d0f")
 		Expect(buyGemErr).NotTo(HaveOccurred())
-		expectedTakerID, takerErr := shared.GetOrCreateAddress("0x3a32292c53bf42b6317334392bf0272da2983252", db)
+		expectedTakerID, takerErr := repository.GetOrCreateAddress(db, "0x3a32292c53bf42b6317334392bf0272da2983252")
 		Expect(takerErr).NotTo(HaveOccurred())
 
 		Expect(len(dbResults)).To(Equal(1))
@@ -112,15 +112,15 @@ var _ = Describe("LogTake Transformer", func() {
 		Expect(err).NotTo(HaveOccurred())
 
 		Expect(len(dbResults)).To(Equal(1))
-		expectedAddressID, addressErr := shared.GetOrCreateAddress(oasisTwoAddress, db)
+		expectedAddressID, addressErr := repository.GetOrCreateAddress(db, oasisTwoAddress)
 		Expect(addressErr).NotTo(HaveOccurred())
-		expectedMakerID, makerErr := shared.GetOrCreateAddress("0xd62824c0a9f7d12a2e3b9674fbbfc63e5db4c5a0", db)
+		expectedMakerID, makerErr := repository.GetOrCreateAddress(db, "0xd62824c0a9f7d12a2e3b9674fbbfc63e5db4c5a0")
 		Expect(makerErr).NotTo(HaveOccurred())
-		expectedPayGemID, payGemErr := shared.GetOrCreateAddress("0x6b175474e89094c44da98b954eedeac495271d0f", db)
+		expectedPayGemID, payGemErr := repository.GetOrCreateAddress(db, "0x6b175474e89094c44da98b954eedeac495271d0f")
 		Expect(payGemErr).NotTo(HaveOccurred())
-		expectedBuyGemID, buyGemErr := shared.GetOrCreateAddress("0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48", db)
+		expectedBuyGemID, buyGemErr := repository.GetOrCreateAddress(db, "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48")
 		Expect(buyGemErr).NotTo(HaveOccurred())
-		expectedTakerID, takerErr := shared.GetOrCreateAddress("0x591e9f22e2e925a5febbbf9da7e7a632e877fe5c", db)
+		expectedTakerID, takerErr := repository.GetOrCreateAddress(db, "0x591e9f22e2e925a5febbbf9da7e7a632e877fe5c")
 		Expect(takerErr).NotTo(HaveOccurred())
 
 		Expect(dbResults[0].OfferID).To(Equal("252088"))

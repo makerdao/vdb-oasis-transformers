@@ -3,10 +3,10 @@ package log_insert_test
 import (
 	"github.com/makerdao/vdb-oasis-transformers/test_config"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/events/log_insert"
-	"github.com/makerdao/vdb-oasis-transformers/transformers/shared"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/test_data"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
+	"github.com/makerdao/vulcanizedb/libraries/shared/repository"
 	"github.com/makerdao/vulcanizedb/pkg/core"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -29,7 +29,7 @@ var _ = Describe("LogInsert Transformer", func() {
 		expectedModel := test_data.LogInsertModel()
 		test_data.AssignAddressID(test_data.LogInsertEventLog, expectedModel, db)
 
-		keeperID, keeperErr := shared.GetOrCreateAddress(test_data.LogInsertKeeperAddress.Hex(), db)
+		keeperID, keeperErr := repository.GetOrCreateAddress(db, test_data.LogInsertKeeperAddress.Hex())
 		Expect(keeperErr).NotTo(HaveOccurred())
 		expectedModel.ColumnValues[constants.KeeperColumn] = keeperID
 

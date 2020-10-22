@@ -9,6 +9,7 @@ import (
 	"github.com/makerdao/vdb-oasis-transformers/transformers/shared"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
+	"github.com/makerdao/vulcanizedb/libraries/shared/repository"
 	"github.com/makerdao/vulcanizedb/pkg/core"
 	"github.com/makerdao/vulcanizedb/pkg/datastore/postgres"
 	"github.com/makerdao/vulcanizedb/pkg/eth"
@@ -48,22 +49,22 @@ func (t Transformer) ToModels(abi string, logs []core.EventLog, db *postgres.DB)
 	}
 	var models []event.InsertionModel
 	for _, entity := range entities {
-		contractAddressId, contractAddressErr := shared.GetOrCreateAddress(entity.ContractAddress.Hex(), db)
+		contractAddressId, contractAddressErr := repository.GetOrCreateAddress(db, entity.ContractAddress.Hex())
 		if contractAddressErr != nil {
 			return nil, shared.ErrCouldNotCreateFK(contractAddressErr)
 		}
 
-		makerAddressID, makerAddressErr := shared.GetOrCreateAddress(entity.Maker.Hex(), db)
+		makerAddressID, makerAddressErr := repository.GetOrCreateAddress(db, entity.Maker.Hex())
 		if makerAddressErr != nil {
 			return nil, shared.ErrCouldNotCreateFK(makerAddressErr)
 		}
 
-		payGemAddressId, payGemAddressErr := shared.GetOrCreateAddress(entity.PayGem.Hex(), db)
+		payGemAddressId, payGemAddressErr := repository.GetOrCreateAddress(db, entity.PayGem.Hex())
 		if payGemAddressErr != nil {
 			return nil, shared.ErrCouldNotCreateFK(payGemAddressErr)
 		}
 
-		buyGemAddressId, buyGemAddressErr := shared.GetOrCreateAddress(entity.BuyGem.Hex(), db)
+		buyGemAddressId, buyGemAddressErr := repository.GetOrCreateAddress(db, entity.BuyGem.Hex())
 		if buyGemAddressErr != nil {
 			return nil, shared.ErrCouldNotCreateFK(buyGemAddressErr)
 		}
