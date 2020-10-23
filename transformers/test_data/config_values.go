@@ -2,7 +2,7 @@ package test_data
 
 import (
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
+	"github.com/makerdao/vdb-transformer-utilities/pkg/shared/constants"
 )
 
 func OasisAddresses() []string {

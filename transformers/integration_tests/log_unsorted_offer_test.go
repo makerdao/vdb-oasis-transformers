@@ -4,8 +4,9 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/makerdao/vdb-oasis-transformers/test_config"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/events/log_unsorted_offer"
-	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
+	constants2 "github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/test_data"
+	"github.com/makerdao/vdb-transformer-utilities/pkg/shared/constants"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
 	"github.com/makerdao/vulcanizedb/libraries/shared/fetcher"
 	. "github.com/onsi/ginkgo"
@@ -14,10 +15,10 @@ import (
 
 var _ = Describe("LogUnsortedOffer Transformer", func() {
 	logUnsortedOfferConfig := event.TransformerConfig{
-		TransformerName:   constants.LogUnsortedOfferTable,
+		TransformerName:   constants2.LogUnsortedOfferTable,
 		ContractAddresses: test_data.OasisAddresses(),
-		ContractAbi:       constants.OasisABI(),
-		Topic:             constants.LogUnsortedOfferSignature(),
+		ContractAbi:       constants2.OasisABI(),
+		Topic:             constants2.LogUnsortedOfferSignature(),
 	}
 
 	It("fetches and transforms a LogUnsortedOffer event for OASIS_MATCHING_MARKET_ONE contract", func() {

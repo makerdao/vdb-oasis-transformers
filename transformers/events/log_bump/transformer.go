@@ -6,8 +6,8 @@ import (
 	"strconv"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
-	"github.com/makerdao/vdb-oasis-transformers/transformers/shared"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
+	"github.com/makerdao/vdb-transformer-utilities/pkg/shared"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
 	"github.com/makerdao/vulcanizedb/libraries/shared/repository"
 	"github.com/makerdao/vulcanizedb/pkg/core"
