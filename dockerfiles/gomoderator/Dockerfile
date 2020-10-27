@@ -1,6 +1,4 @@
-FROM golang:alpine as builder
-
-RUN apk --update --no-cache add make git g++ linux-headers python3
+FROM makerdao/vdb-builder:latest as builder
 
 ARG VDB_VERSION=prod
 ENV GO111MODULE on
@@ -17,8 +15,8 @@ COPY . .
 FROM golang:alpine
 WORKDIR /go/src/github.com/makerdao/vulcanizedb
 
-# add go so we can build the plugin
-RUN apk add --update --no-cache git g++ linux-headers python3
+# add python to run gomoderator
+RUN apk add --no-cache python3
 
 # get access to go.mod files in directories
 COPY --from=builder /go/src/github.com/makerdao/vulcanizedb .
