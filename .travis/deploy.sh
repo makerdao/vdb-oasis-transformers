@@ -12,16 +12,14 @@ function message() {
 
 ENVIRONMENT=$1
 if [ "$ENVIRONMENT" == "prod" ]; then
-TAG=latest
-elif [ "$ENVIRONMENT" == "staging" ]; then
-TAG=staging
+    TAG=latest
 else
    message UNKNOWN ENVIRONMENT
 fi
 
 if [ -z "$ENVIRONMENT" ]; then
     echo 'You must specify an environment (bash deploy.sh <ENVIRONMENT>).'
-    echo 'Allowed values are "staging" or "prod"'
+    echo 'Allowed values are ("prod")'
     exit 1
 fi
 
@@ -34,19 +32,10 @@ echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USER" --password-stdi
 message PUSHING EXECUTE DOCKER IMAGE
 docker push makerdao/vdb-oasis-execute:$TAG
 
-# service deploy
-# if [ "$ENVIRONMENT" == "prod" ]; then
-#   message DEPLOYING EXECUTE
-#   aws ecs update-service --cluster vdb-cluster-$ENVIRONMENT --service vdb-execute-$ENVIRONMENT --force-new-deployment --endpoint https://ecs.$PROD_REGION.amazonaws.com --region $PROD_REGION
-#
-#    message DEPLOYING EXTRACT-DIFFS
-#   aws ecs update-service --cluster vdb-cluster-$ENVIRONMENT --service vdb-extract-diffs-$ENVIRONMENT --force-new-deployment --endpoint https://ecs.$PROD_REGION.amazonaws.com --region $PROD_REGION
-# elif [ "$ENVIRONMENT" == "staging" ]; then
-#   message DEPLOYING EXECUTE
-#   aws ecs update-service --cluster vdb-cluster-$ENVIRONMENT --service vdb-execute-$ENVIRONMENT --force-new-deployment --endpoint https://ecs.$STAGING_REGION.amazonaws.com --region $STAGING_REGION
-#
-#   message DEPLOYING EXTRACT-DIFFS
-#   aws ecs update-service --cluster vdb-cluster-$ENVIRONMENT --service vdb-extract-diffs-$ENVIRONMENT --force-new-deployment --endpoint https://ecs.$STAGING_REGION.amazonaws.com --region $STAGING_REGION
-# else
-#    message UNKNOWN ENVIRONMENT
-# fi
+#service deploy
+if [ "$ENVIRONMENT" == "prod" ]; then
+    message DEPLOYING EXECUTE
+    aws ecs update-service --cluster vdb-cluster-$ENVIRONMENT --service vdb-oasis-execute-$ENVIRONMENT --force-new-deployment --endpoint https://ecs.$PROD_REGION.amazonaws.com --region $PROD_REGION
+else
+    message UNKNOWN ENVIRONMENT
+fi
