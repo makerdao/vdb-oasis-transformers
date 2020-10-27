@@ -6,7 +6,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/makerdao/vdb-oasis-transformers/test_config"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/events/log_make"
-	constants2 "github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
+	oasisConstants "github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/test_data"
 	"github.com/makerdao/vdb-transformer-utilities/pkg/shared/constants"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
@@ -18,10 +18,10 @@ import (
 
 var _ = Describe("LogMake Transformer", func() {
 	config := event.TransformerConfig{
-		TransformerName:   constants2.LogMakeTable,
+		TransformerName:   oasisConstants.LogMakeTable,
 		ContractAddresses: test_data.OasisAddresses(),
-		ContractAbi:       constants2.OasisABI(),
-		Topic:             constants2.LogMakeSignature(),
+		ContractAbi:       oasisConstants.OasisABI(),
+		Topic:             oasisConstants.LogMakeSignature(),
 	}
 
 	It("fetches and transforms a LogMake event for OASIS_MATCHING_MARKET_ONE contract", func() {
