@@ -1,21 +1,15 @@
-FROM golang:1.15.2-buster as builder
-
-RUN apt-get update && \
-    apt-get install -y make git g++ linux-headers-amd64
+FROM makerdao/vdb-builder:latest as builder
 
 ARG VDB_VERSION=prod
 
-ENV GO111MODULE on
-
 WORKDIR /go/src/github.com/makerdao/vdb-oasis-transformers
-ADD . .
+COPY . .
 
 WORKDIR /go/src/github.com/makerdao
 RUN git clone https://github.com/makerdao/vulcanizedb.git
 WORKDIR /go/src/github.com/makerdao/vulcanizedb
 RUN git checkout $VDB_VERSION
 RUN go build
-RUN go get -tags='no_mysql no_sqlite3 no_mssql no_redshift' github.com/pressly/goose/cmd/goose@v2.7.0-rc5
 
 # build oasis with local vdb
 WORKDIR /go/src/github.com/makerdao/vdb-oasis-transformers
@@ -25,19 +19,8 @@ RUN make plugin PACKAGE=github.com/makerdao/vdb-oasis-transformers \
     OUTPUT_LOCATION=$GOPATH/src/github.com/makerdao/vdb-oasis-transformers/plugins/transformerExporter.so
 
 # app container
-FROM golang:1.15.2-buster
+FROM makerdao/vdb-runner:latest
 WORKDIR /go/src/github.com/makerdao/vulcanizedb
-
-# add certificates for node requests via https
-# bash for wait-for-it
-RUN apt-get update \
-        && apt-get update -y \
-        && apt-get install -y \
-        ca-certificates \
-        postgresql-client \
-        bash \
-        busybox \
-        && update-ca-certificates 2>/dev/null || true
 
 ARG CONFIG_FILE=environments/oasisTransformers.toml
 
