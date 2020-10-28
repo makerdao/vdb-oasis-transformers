@@ -6,8 +6,9 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/makerdao/vdb-oasis-transformers/test_config"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/events/log_min_sell"
-	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
+	oasisConstants "github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/test_data"
+	"github.com/makerdao/vdb-transformer-utilities/pkg/shared/constants"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
 	"github.com/makerdao/vulcanizedb/libraries/shared/fetcher"
 	"github.com/makerdao/vulcanizedb/libraries/shared/repository"
@@ -17,10 +18,10 @@ import (
 
 var _ = Describe("LogMinSell Transformer", func() {
 	config := event.TransformerConfig{
-		TransformerName:   constants.LogMinSellTable,
+		TransformerName:   oasisConstants.LogMinSellTable,
 		ContractAddresses: test_data.OasisAddresses(),
-		ContractAbi:       constants.OasisABI(),
-		Topic:             constants.LogMinSellSignature(),
+		ContractAbi:       oasisConstants.OasisABI(),
+		Topic:             oasisConstants.LogMinSellSignature(),
 	}
 
 	It("fetches and transforms a LogMinSell event for OASIS_MATCHING_MARKET_ONE contract", func() {

@@ -4,8 +4,9 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/makerdao/vdb-oasis-transformers/test_config"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/events/log_item_update"
-	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
+	oasisConstants "github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/test_data"
+	"github.com/makerdao/vdb-transformer-utilities/pkg/shared/constants"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
 	"github.com/makerdao/vulcanizedb/libraries/shared/fetcher"
 	. "github.com/onsi/ginkgo"
@@ -14,10 +15,10 @@ import (
 
 var _ = Describe("LogItemUpdate Transformer", func() {
 	logItemUpdateConfig := event.TransformerConfig{
-		TransformerName:   constants.LogItemUpdateTable,
+		TransformerName:   oasisConstants.LogItemUpdateTable,
 		ContractAddresses: test_data.OasisAddresses(),
-		ContractAbi:       constants.OasisABI(),
-		Topic:             constants.LogItemUpdateSignature(),
+		ContractAbi:       oasisConstants.OasisABI(),
+		Topic:             oasisConstants.LogItemUpdateSignature(),
 	}
 
 	It("fetches and transforms a LogItemUpdate event for OASIS_MATCHING_MARKET_ONE contract", func() {

@@ -4,8 +4,9 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/makerdao/vdb-oasis-transformers/test_config"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/events/log_buy_enabled"
-	"github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
+	oasisConstants "github.com/makerdao/vdb-oasis-transformers/transformers/shared/constants"
 	"github.com/makerdao/vdb-oasis-transformers/transformers/test_data"
+	"github.com/makerdao/vdb-transformer-utilities/pkg/shared/constants"
 	"github.com/makerdao/vulcanizedb/libraries/shared/factories/event"
 	"github.com/makerdao/vulcanizedb/libraries/shared/fetcher"
 	. "github.com/onsi/ginkgo"
@@ -14,10 +15,10 @@ import (
 
 var _ = Describe("LogBuyEnabled Transformer", func() {
 	logBuyEnabledConfig := event.TransformerConfig{
-		TransformerName:   constants.LogBuyEnabledTable,
+		TransformerName:   oasisConstants.LogBuyEnabledTable,
 		ContractAddresses: test_data.OasisAddresses(),
-		ContractAbi:       constants.OasisABI(),
-		Topic:             constants.LogBuyEnabledSignature(),
+		ContractAbi:       oasisConstants.OasisABI(),
+		Topic:             oasisConstants.LogBuyEnabledSignature(),
 	}
 	//TODO: Update test with blocknumber and event when available on mainnet
 	XIt("fetches and transforms a LogBuyEnabled event for OASIS_MATCHING_MARKET_ONE contract", func() {
