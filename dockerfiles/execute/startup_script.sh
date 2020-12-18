@@ -9,4 +9,4 @@ fi
 
 echo "Starting transformer execution..."
 # Fire up execute
-./vulcanizedb execute --config config.toml -d $DIFF_STARTING_BLOCK
+./vulcanizedb execute --config config.toml --recheck-headers -d $DIFF_STARTING_BLOCK
