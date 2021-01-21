@@ -38,4 +38,8 @@ if [ "$ENVIRONMENT" == "prod" ]; then
     aws ecs update-service --cluster vdb-cluster-$ENVIRONMENT --service vdb-oasis-execute-$ENVIRONMENT --force-new-deployment --endpoint https://ecs.$PROD_REGION.amazonaws.com --region $PROD_REGION
 else
     message UNKNOWN ENVIRONMENT
+    exit 1
 fi
+
+# Announce deploy
+.travis/announce.sh $ENVIRONMENT vdb-oasis-execute
