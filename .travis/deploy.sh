@@ -14,10 +14,7 @@ ENVIRONMENT=$1
 if [ "$ENVIRONMENT" == "prod" ]; then
     TAG=latest
 else
-   message UNKNOWN ENVIRONMENT
-fi
-
-if [ -z "$ENVIRONMENT" ]; then
+    message UNKNOWN ENVIRONMENT
     echo 'You must specify an environment (bash deploy.sh <ENVIRONMENT>).'
     echo 'Allowed values are ("prod")'
     exit 1

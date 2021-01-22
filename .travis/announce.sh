@@ -28,7 +28,7 @@ fi
 PROCESS=$2
 if [ -z "$PROCESS" ]; then
     message NO PROCESS NAME
-    echo 'You must specify process name, such as vdb-execute (bash announce.sh <ENVIRONMENT> <PROCESS>).'
+    echo 'You must specify process name, such as vdb-oasis-execute (bash announce.sh <ENVIRONMENT> <PROCESS>).'
     exit 1
 fi
 
