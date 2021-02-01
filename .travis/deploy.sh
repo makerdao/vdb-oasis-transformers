@@ -31,8 +31,12 @@ docker push makerdao/vdb-oasis-execute:$TAG
 
 #service deploy
 if [ "$ENVIRONMENT" == "prod" ]; then
-    message DEPLOYING EXECUTE
+    message DEPLOYING EXECUTE TO PROD
     aws ecs update-service --cluster vdb-cluster-$ENVIRONMENT --service vdb-oasis-execute-$ENVIRONMENT --force-new-deployment --endpoint https://ecs.$PROD_REGION.amazonaws.com --region $PROD_REGION
+
+    message DEPLOYING EXECUTE TO PRIVATE PROD
+    aws ecs update-service --cluster vdb-cluster-$ENVIRONMENT --service vdb-oasis-execute-$ENVIRONMENT --force-new-deployment --endpoint https://ecs.$PRIVATE_PROD_REGION.amazonaws.com --region $PRIVATE_PROD_REGION
+
 else
     message UNKNOWN ENVIRONMENT
     exit 1
