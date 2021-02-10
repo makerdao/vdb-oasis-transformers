@@ -21,13 +21,17 @@ else
 fi
 
 message BUILDING EXECUTE DOCKER IMAGE
-docker build -f dockerfiles/execute/Dockerfile . -t makerdao/vdb-oasis-execute:$TAG
+
+COMMIT_HASH=${TRAVIS_COMMIT::7}
+IMMUTABLE_TAG=$TRAVIS_BUILD_NUMBER-$COMMIT_HASH
+
+docker build -f dockerfiles/execute/Dockerfile . -t makerdao/vdb-oasis-execute:$TAG -t makerdao/vdb-oasis-execute:$IMMUTABLE_TAG
 
 message LOGGING INTO DOCKERHUB
 echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USER" --password-stdin
 
 message PUSHING EXECUTE DOCKER IMAGE
-docker push makerdao/vdb-oasis-execute:$TAG
+docker image push --all-tags makerdao/vdb-oasis-execute
 
 #service deploy
 if [ "$ENVIRONMENT" == "prod" ]; then
