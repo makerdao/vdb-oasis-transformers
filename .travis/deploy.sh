@@ -31,7 +31,8 @@ message LOGGING INTO DOCKERHUB
 echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USER" --password-stdin
 
 message PUSHING EXECUTE DOCKER IMAGE
-docker image push --all-tags makerdao/vdb-oasis-execute
+docker push makerdao/vdb-oasis-execute:$TAG
+docker push makerdao/vdb-oasis-execute:$IMMUTABLE_TAG
 
 #service deploy
 if [ "$ENVIRONMENT" == "prod" ]; then
