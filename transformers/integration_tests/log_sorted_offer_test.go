@@ -92,4 +92,40 @@ var _ = Describe("LogSortedOffer Transformer", func() {
 
 		Expect(dbResult).To(ConsistOf("253097"))
 	})
+
+	It("fetches and transforms a LogSortedOffer event for OASIS_MATCHING_MARKET_1_1 contract", func() {
+		blockNumber := int64(11843426)
+		logSortedOfferConfig.StartingBlockNumber = blockNumber
+		logSortedOfferConfig.EndingBlockNumber = blockNumber
+
+		test_config.CleanTestDB(db)
+
+		header, err := persistHeader(db, blockNumber, blockChain)
+		Expect(err).NotTo(HaveOccurred())
+
+		initializer := event.ConfiguredTransformer{
+			Config:      logSortedOfferConfig,
+			Transformer: log_sorted_offer.Transformer{},
+		}
+		transformer := initializer.NewTransformer(db)
+
+		oasis11Address := constants.GetContractAddress("OASIS_MATCHING_MARKET_1_1")
+		logFetcher := fetcher.NewLogFetcher(blockChain)
+		logs, err := logFetcher.FetchLogs(
+			[]common.Address{common.HexToAddress(oasis11Address)},
+			[]common.Hash{common.HexToHash(logSortedOfferConfig.Topic)},
+			header)
+		Expect(err).NotTo(HaveOccurred())
+
+		eventLogs := test_data.CreateLogs(header.Id, logs, db)
+
+		err = transformer.Execute(eventLogs)
+		Expect(err).NotTo(HaveOccurred())
+
+		var dbResult []string
+		err = db.Select(&dbResult, `SELECT offer_id from oasis.log_sorted_offer`)
+		Expect(err).NotTo(HaveOccurred())
+
+		Expect(dbResult).To(ConsistOf("21"))
+	})
 })

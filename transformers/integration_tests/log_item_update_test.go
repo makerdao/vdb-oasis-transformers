@@ -65,6 +65,7 @@ var _ = Describe("LogItemUpdate Transformer", func() {
 			"809995", "637558", "559973", "548250", "772805",
 		}))
 	})
+
 	It("fetches and transforms a LogItemUpdate event for OASIS_MATCHING_MARKET_TWO contract", func() {
 		blockNumber := int64(9827320)
 		logItemUpdateConfig.StartingBlockNumber = blockNumber
@@ -104,6 +105,47 @@ var _ = Describe("LogItemUpdate Transformer", func() {
 			offerIds = append(offerIds, d.OfferID)
 		}
 		Expect(offerIds).To(ConsistOf([]string{"228713", "228696", "228695"}))
+	})
+
+	It("fetches and transforms a LogItemUpdate event for OASIS_MATCHING_MARKET_1_1 contract", func() {
+		blockNumber := int64(11843426)
+		logItemUpdateConfig.StartingBlockNumber = blockNumber
+		logItemUpdateConfig.EndingBlockNumber = blockNumber
+
+		test_config.CleanTestDB(db)
+
+		header, err := persistHeader(db, blockNumber, blockChain)
+		Expect(err).NotTo(HaveOccurred())
+
+		initializer := event.ConfiguredTransformer{
+			Config:      logItemUpdateConfig,
+			Transformer: log_item_update.Transformer{},
+		}
+		transformer := initializer.NewTransformer(db)
+
+		oasis11Address := constants.GetContractAddress("OASIS_MATCHING_MARKET_1_1")
+		logFetcher := fetcher.NewLogFetcher(blockChain)
+		logs, err := logFetcher.FetchLogs(
+			[]common.Address{common.HexToAddress(oasis11Address)},
+			[]common.Hash{common.HexToHash(logItemUpdateConfig.Topic)},
+			header)
+		Expect(err).NotTo(HaveOccurred())
+
+		eventLogs := test_data.CreateLogs(header.Id, logs, db)
+
+		err = transformer.Execute(eventLogs)
+		Expect(err).NotTo(HaveOccurred())
+
+		var dbResult []logItemUpdateModel
+		err = db.Select(&dbResult, `SELECT offer_id from oasis.log_item_update`)
+		Expect(err).NotTo(HaveOccurred())
+
+		Expect(len(dbResult)).To(Equal(1))
+		var offerIds []string
+		for _, d := range dbResult {
+			offerIds = append(offerIds, d.OfferID)
+		}
+		Expect(offerIds).To(ConsistOf([]string{"21"}))
 	})
 })
 

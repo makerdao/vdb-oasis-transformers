@@ -114,6 +114,52 @@ var _ = Describe("LogMinSell Transformer", func() {
 		Expect(dbResult.MinAmount).To(Equal("21786"))
 		Expect(dbResult.AddressID).To(Equal(expectedAddressID))
 	})
+
+	It("fetches and transforms a LogMinSell event for OASIS_MATCHING_MARKET_1_1 contract", func() {
+		blockNumber := int64(11752276)
+		config.StartingBlockNumber = blockNumber
+		config.EndingBlockNumber = blockNumber
+
+		test_config.CleanTestDB(db)
+
+		header, err := persistHeader(db, blockNumber, blockChain)
+		Expect(err).NotTo(HaveOccurred())
+
+		initializer := event.ConfiguredTransformer{
+			Config:      config,
+			Transformer: log_min_sell.Transformer{},
+		}
+		transformer := initializer.NewTransformer(db)
+
+		oasis11Address := constants.GetContractAddress("OASIS_MATCHING_MARKET_1_1")
+		logFetcher := fetcher.NewLogFetcher(blockChain)
+		logs, err := logFetcher.FetchLogs(
+			[]common.Address{common.HexToAddress(oasis11Address)},
+			[]common.Hash{common.HexToHash(config.Topic)},
+			header)
+		Expect(err).NotTo(HaveOccurred())
+
+		eventLogs := test_data.CreateLogs(header.Id, logs, db)
+
+		err = transformer.Execute(eventLogs)
+		Expect(err).NotTo(HaveOccurred())
+
+		var dbResults []logMinSellModel
+		err = db.Select(&dbResults, `SELECT pay_gem, min_amount, address_id from oasis.log_min_sell`)
+		Expect(err).NotTo(HaveOccurred())
+
+		expectedAddressID, addressErr := repository.GetOrCreateAddress(db, oasis11Address)
+		Expect(addressErr).NotTo(HaveOccurred())
+		expectedPayGemID, payGemErr := repository.GetOrCreateAddress(db, "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2")
+		Expect(payGemErr).NotTo(HaveOccurred())
+
+		Expect(len(dbResults)).To(Equal(1))
+		sort.Sort(byMinAmount(dbResults))
+		dbResult := dbResults[0]
+		Expect(dbResult.PayGem).To(Equal(expectedPayGemID))
+		Expect(dbResult.MinAmount).To(Equal("72503306920913261"))
+		Expect(dbResult.AddressID).To(Equal(expectedAddressID))
+	})
 })
 
 type logMinSellModel struct {
