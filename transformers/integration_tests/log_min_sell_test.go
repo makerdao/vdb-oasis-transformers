@@ -85,10 +85,10 @@ var _ = Describe("LogMinSell Transformer", func() {
 		}
 		transformer := initializer.NewTransformer(db)
 
-		oasis_two_address := constants.GetContractAddress("OASIS_MATCHING_MARKET_TWO")
+		oasisTwoAddress := constants.GetContractAddress("OASIS_MATCHING_MARKET_TWO")
 		logFetcher := fetcher.NewLogFetcher(blockChain)
 		logs, err := logFetcher.FetchLogs(
-			[]common.Address{common.HexToAddress(oasis_two_address)},
+			[]common.Address{common.HexToAddress(oasisTwoAddress)},
 			[]common.Hash{common.HexToHash(config.Topic)},
 			header)
 		Expect(err).NotTo(HaveOccurred())
@@ -102,7 +102,7 @@ var _ = Describe("LogMinSell Transformer", func() {
 		err = db.Select(&dbResults, `SELECT pay_gem, min_amount, address_id from oasis.log_min_sell`)
 		Expect(err).NotTo(HaveOccurred())
 
-		expectedAddressID, addressErr := repository.GetOrCreateAddress(db, oasis_two_address)
+		expectedAddressID, addressErr := repository.GetOrCreateAddress(db, oasisTwoAddress)
 		Expect(addressErr).NotTo(HaveOccurred())
 		expectedPayGemID, payGemErr := repository.GetOrCreateAddress(db, "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599")
 		Expect(payGemErr).NotTo(HaveOccurred())

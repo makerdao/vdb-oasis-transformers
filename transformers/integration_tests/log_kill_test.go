@@ -97,10 +97,10 @@ var _ = Describe("LogKill Transformer", func() {
 		}
 		transformer := initializer.NewTransformer(db)
 
-		oasis_two_address := constants.GetContractAddress("OASIS_MATCHING_MARKET_TWO")
+		oasisTwoAddress := constants.GetContractAddress("OASIS_MATCHING_MARKET_TWO")
 		logFetcher := fetcher.NewLogFetcher(blockChain)
 		logs, err := logFetcher.FetchLogs(
-			[]common.Address{common.HexToAddress(oasis_two_address)},
+			[]common.Address{common.HexToAddress(oasisTwoAddress)},
 			[]common.Hash{common.HexToHash(config.Topic)},
 			header)
 		Expect(err).NotTo(HaveOccurred())
@@ -116,7 +116,7 @@ var _ = Describe("LogKill Transformer", func() {
 
 		Expect(len(dbResults)).To(Equal(1))
 		dbResult := dbResults[0]
-		expectedAddressID, addressErr := repository.GetOrCreateAddress(db, oasis_two_address)
+		expectedAddressID, addressErr := repository.GetOrCreateAddress(db, oasisTwoAddress)
 		Expect(addressErr).NotTo(HaveOccurred())
 		expectedMakerID, makerErr := repository.GetOrCreateAddress(db, "0x59df5a7df54000fcc09dfb303d24b0d302182540")
 		Expect(makerErr).NotTo(HaveOccurred())
