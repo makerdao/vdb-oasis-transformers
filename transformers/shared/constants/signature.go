@@ -26,30 +26,34 @@ func getLogNoteTopicZero(solidityFunctionSignature string) string {
 	return "0x" + rawSignature[2:10] + "00000000000000000000000000000000000000000000000000000000"
 }
 
-func logBumpEvent() string { return constants.GetSolidityFunctionSignature(OasisABI(), "LogBump") }
+func logBumpEvent() string { return constants.GetSolidityFunctionSignature(OasisABI1_1(), "LogBump") }
 func logBuyEnabledEvent() string {
 	return constants.GetSolidityFunctionSignature(OasisABI(), "LogBuyEnabled")
 }
-func logDeleteEvent() string { return constants.GetSolidityFunctionSignature(OasisABI(), "LogDelete") }
-func logInsertEvent() string { return constants.GetSolidityFunctionSignature(OasisABI(), "LogInsert") }
-func logItemUpdateEvent() string {
-	return constants.GetSolidityFunctionSignature(OasisABI(), "LogItemUpdate")
+func logDeleteEvent() string {
+	return constants.GetSolidityFunctionSignature(OasisABI1_1(), "LogDelete")
 }
-func logKillEvent() string { return constants.GetSolidityFunctionSignature(OasisABI(), "LogKill") }
-func logMakeEvent() string { return constants.GetSolidityFunctionSignature(OasisABI(), "LogMake") }
+func logInsertEvent() string {
+	return constants.GetSolidityFunctionSignature(OasisABI1_1(), "LogInsert")
+}
+func logItemUpdateEvent() string {
+	return constants.GetSolidityFunctionSignature(OasisABI1_1(), "LogItemUpdate")
+}
+func logKillEvent() string { return constants.GetSolidityFunctionSignature(OasisABI1_1(), "LogKill") }
+func logMakeEvent() string { return constants.GetSolidityFunctionSignature(OasisABI1_1(), "LogMake") }
 func logMatchingEnabledEvent() string {
 	return constants.GetSolidityFunctionSignature(OasisABI(), "LogMatchingEnabled")
 }
 func logMinSellEvent() string {
-	return constants.GetSolidityFunctionSignature(OasisABI(), "LogMinSell")
+	return constants.GetSolidityFunctionSignature(OasisABI1_1(), "LogMinSell")
 }
 func logSortedOfferMethod() string {
-	return constants.GetSolidityFunctionSignature(OasisABI(), "LogSortedOffer")
+	return constants.GetSolidityFunctionSignature(OasisABI1_1(), "LogSortedOffer")
 }
-func logTakeEvent() string  { return constants.GetSolidityFunctionSignature(OasisABI(), "LogTake") }
-func logTradeEvent() string { return constants.GetSolidityFunctionSignature(OasisABI(), "LogTrade") }
+func logTakeEvent() string  { return constants.GetSolidityFunctionSignature(OasisABI1_1(), "LogTake") }
+func logTradeEvent() string { return constants.GetSolidityFunctionSignature(OasisABI1_1(), "LogTrade") }
 func logUnsortedOfferMethod() string {
-	return constants.GetSolidityFunctionSignature(OasisABI(), "LogUnsortedOffer")
+	return constants.GetSolidityFunctionSignature(OasisABI1_1(), "LogUnsortedOffer")
 }
 func setMinSellMethod() string {
 	return constants.GetSolidityFunctionSignature(OasisABI(), "setMinSell")
