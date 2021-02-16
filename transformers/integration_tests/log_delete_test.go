@@ -13,7 +13,7 @@ import (
 )
 
 // TODO: test against real log from mainnet if detected
-var _ = XDescribe("LogSortedOffer Transformer", func() {
+var _ = XDescribe("LogDelete Transformer", func() {
 	logDeleteConfig := event.TransformerConfig{
 		TransformerName:   constants.LogDeleteTable,
 		ContractAddresses: test_data.OasisAddresses(),

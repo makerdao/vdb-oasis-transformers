@@ -117,6 +117,54 @@ var _ = Describe("LogTrade Transformer", func() {
 		Expect(dbResults[0].BuyAmt).To(Equal("3999999999999999999960"))
 		Expect(dbResults[0].AddressID).To(Equal(expectedAddressID))
 	})
+
+	It("fetches and transforms a LogTrade event for OASIS_MATCHING_MARKET_1_1 contract", func() {
+		blockNumber := int64(11835227)
+		config.StartingBlockNumber = blockNumber
+		config.EndingBlockNumber = blockNumber
+
+		test_config.CleanTestDB(db)
+
+		header, err := persistHeader(db, blockNumber, blockChain)
+		Expect(err).NotTo(HaveOccurred())
+
+		initializer := event.ConfiguredTransformer{
+			Config:      config,
+			Transformer: log_trade.Transformer{},
+		}
+		transformer := initializer.NewTransformer(db)
+
+		oasis11Address := constants.GetContractAddress("OASIS_MATCHING_MARKET_1_1")
+		logFetcher := fetcher.NewLogFetcher(blockChain)
+		logs, err := logFetcher.FetchLogs(
+			[]common.Address{common.HexToAddress(oasis11Address)},
+			[]common.Hash{common.HexToHash(config.Topic)},
+			header)
+		Expect(err).NotTo(HaveOccurred())
+
+		eventLogs := test_data.CreateLogs(header.Id, logs, db)
+
+		err = transformer.Execute(eventLogs)
+		Expect(err).NotTo(HaveOccurred())
+
+		var dbResults []logTradeModel
+		err = db.Select(&dbResults, `SELECT pay_gem, buy_gem, pay_amt, buy_amt, address_id from oasis.log_trade`)
+		Expect(err).NotTo(HaveOccurred())
+
+		Expect(len(dbResults)).To(Equal(1))
+		expectedAddressID, addressErr := repository.GetOrCreateAddress(db, oasis11Address)
+		Expect(addressErr).NotTo(HaveOccurred())
+		expectedPayGemID, payGemErr := repository.GetOrCreateAddress(db, "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2")
+		Expect(payGemErr).NotTo(HaveOccurred())
+		expectedBuyGemID, buyGemErr := repository.GetOrCreateAddress(db, "0x6b175474e89094c44da98b954eedeac495271d0f")
+		Expect(buyGemErr).NotTo(HaveOccurred())
+
+		Expect(dbResults[0].PayGem).To(Equal(expectedPayGemID))
+		Expect(dbResults[0].BuyGem).To(Equal(expectedBuyGemID))
+		Expect(dbResults[0].PayAmt).To(Equal("544799176107106076"))
+		Expect(dbResults[0].BuyAmt).To(Equal("1057999999999999999592"))
+		Expect(dbResults[0].AddressID).To(Equal(expectedAddressID))
+	})
 })
 
 type logTradeModel struct {
