@@ -13,10 +13,12 @@ function message() {
 ENVIRONMENT=$1
 if [ "$ENVIRONMENT" == "prod" ]; then
     TAG=latest
+elif [ "$ENVIRONMENT" == "staging" ]; then
+    TAG="develop"
 else
     message UNKNOWN ENVIRONMENT
     echo 'You must specify an environment (bash deploy.sh <ENVIRONMENT>).'
-    echo 'Allowed values are ("prod")'
+    echo 'Allowed values are ("prod", "staging")'
     exit 1
 fi
 
@@ -41,7 +43,9 @@ if [ "$ENVIRONMENT" == "prod" ]; then
 
     message DEPLOYING EXECUTE TO PRIVATE PROD
     aws ecs update-service --cluster vdb-cluster-$ENVIRONMENT --service vdb-oasis-execute-$ENVIRONMENT --force-new-deployment --endpoint https://ecs.$PRIVATE_PROD_REGION.amazonaws.com --region $PRIVATE_PROD_REGION
-
+elif [ "$ENVIRONMENT" == "staging" ]; then
+    message DEPLOYING EXECUTE TO $ENVIRONMENT
+    aws ecs update-service --cluster vulcanize-cluster-$ENVIRONMENT --service vdb-oasis-execute-$ENVIRONMENT --force-new-deployment --endpoint https://ecs.$STAGING_REGION.amazonaws.com --region $STAGING_REGION
 else
     message UNKNOWN ENVIRONMENT
     exit 1
