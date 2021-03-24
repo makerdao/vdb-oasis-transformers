@@ -23,9 +23,11 @@ deploy:
   script: bash ./.travis/deploy.sh prod
   on:
     branch: main
+
 - provider: script
   script: bash ./.travis/deploy.sh staging
   on:
     branch: develop
+
 notifications:
   email: false

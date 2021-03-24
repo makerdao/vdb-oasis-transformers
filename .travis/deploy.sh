@@ -45,7 +45,7 @@ if [ "$ENVIRONMENT" == "prod" ]; then
     aws ecs update-service --cluster vdb-cluster-$ENVIRONMENT --service vdb-oasis-execute-$ENVIRONMENT --force-new-deployment --endpoint https://ecs.$PRIVATE_PROD_REGION.amazonaws.com --region $PRIVATE_PROD_REGION
 elif [ "$ENVIRONMENT" == "staging" ]; then
     message DEPLOYING EXECUTE TO $ENVIRONMENT
-    aws ecs update-service --cluster vulcanize-cluster-$ENVIRONMENT --service vdb-oasis-execute-$ENVIRONMENT --force-new-deployment --endpoint https://ecs.$STAGING_REGION.amazonaws.com --region $STAGING_REGION
+    aws ecs update-service --cluster vulcanize-cluster-$ENVIRONMENT --service vulcanize-oasis-execute-$ENVIRONMENT --force-new-deployment --endpoint https://ecs.$STAGING_REGION.amazonaws.com --region $STAGING_REGION
 else
     message UNKNOWN ENVIRONMENT
     exit 1
