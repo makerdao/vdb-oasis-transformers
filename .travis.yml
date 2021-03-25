@@ -25,7 +25,12 @@ deploy:
     branch: main
 
 - provider: script
-  script: bash ./.travis/deploy.sh staging
+  script: bash ./.travis/deploy.sh private-prod
+  on:
+    branch: main
+
+- provider: script
+  script: bash ./.travis/deploy.sh qa
   on:
     branch: develop
 
