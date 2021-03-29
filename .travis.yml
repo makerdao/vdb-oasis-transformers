@@ -23,5 +23,16 @@ deploy:
   script: bash ./.travis/deploy.sh prod
   on:
     branch: main
+
+- provider: script
+  script: bash ./.travis/deploy.sh private-prod
+  on:
+    branch: main
+
+- provider: script
+  script: bash ./.travis/deploy.sh qa
+  on:
+    branch: develop
+
 notifications:
   email: false

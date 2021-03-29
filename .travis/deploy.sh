@@ -11,12 +11,20 @@ function message() {
 }
 
 ENVIRONMENT=$1
+TAG="lastest"
+
 if [ "$ENVIRONMENT" == "prod" ]; then
-    TAG=latest
+  REGION=$PROD_REGION
+elif [ "$ENVIRONMENT" == "private-prod" ]; then
+  REGION=$PRIVATE_PROD_REGION
+  ENVIRONMENT="prod"
+elif [ "$ENVIRONMENT" == "qa" ]; then
+  REGION=$QA_REGION
+  TAG="develop"
 else
     message UNKNOWN ENVIRONMENT
     echo 'You must specify an environment (bash deploy.sh <ENVIRONMENT>).'
-    echo 'Allowed values are ("prod")'
+    echo 'Allowed values are ("prod", "qa")'
     exit 1
 fi
 
@@ -34,18 +42,8 @@ message PUSHING EXECUTE DOCKER IMAGE
 docker push makerdao/vdb-oasis-execute:$TAG
 docker push makerdao/vdb-oasis-execute:$IMMUTABLE_TAG
 
-#service deploy
-if [ "$ENVIRONMENT" == "prod" ]; then
-    message DEPLOYING EXECUTE TO PROD
-    aws ecs update-service --cluster vdb-cluster-$ENVIRONMENT --service vdb-oasis-execute-$ENVIRONMENT --force-new-deployment --endpoint https://ecs.$PROD_REGION.amazonaws.com --region $PROD_REGION
-
-    message DEPLOYING EXECUTE TO PRIVATE PROD
-    aws ecs update-service --cluster vdb-cluster-$ENVIRONMENT --service vdb-oasis-execute-$ENVIRONMENT --force-new-deployment --endpoint https://ecs.$PRIVATE_PROD_REGION.amazonaws.com --region $PRIVATE_PROD_REGION
-
-else
-    message UNKNOWN ENVIRONMENT
-    exit 1
-fi
+message DEPLOYING OASIS EXECUTE TO ${ENVIRONMENT} in ${REGION}
+    aws ecs update-service --cluster vdb-cluster-$ENVIRONMENT --service vdb-oasis-execute-$ENVIRONMENT --force-new-deployment --endpoint https://ecs.$REGION.amazonaws.com --region $REGION
 
 # Announce deploy
 .travis/announce.sh $ENVIRONMENT vdb-oasis-execute
