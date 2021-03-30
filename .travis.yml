@@ -1,4 +1,4 @@
-dist: focal
+dist: bionic
 language: go
 go:
 - 1.14
@@ -6,7 +6,11 @@ services:
 - postgresql
 - docker
 addons:
-  postgresql: '11.6'
+  postgresql: '11'
+apt:
+  packages:
+    - postgresql-11
+    - postgresql-client-11
 go_import_path: github.com/makerdao/vdb-oasis-transformers
 before_install:
 - make installtools
