@@ -14,7 +14,6 @@ apt:
 go_import_path: github.com/makerdao/vdb-oasis-transformers
 before_install:
 - make installtools
-- bash ./scripts/install-postgres-11.sh
 - sudo apt-get update && sudo apt-get install python3-pip -y
 - sudo pip3 install awscli
 script:
