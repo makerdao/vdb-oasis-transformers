@@ -14,7 +14,7 @@ apt:
 go_import_path: github.com/makerdao/vdb-oasis-transformers
 before_install:
 - make installtools
-- sudo apt-get update && sudo apt-get install python3-pip -y
+- sudo apt-get update && sudo apt-get install python3-pip python3-setuptools -y
 - sudo pip3 install awscli
 script:
 - set -e
