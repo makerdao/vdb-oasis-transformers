@@ -11,7 +11,7 @@ function message() {
 }
 
 ENVIRONMENT=$1
-TAG="lastest"
+TAG="latest"
 
 if [ "$ENVIRONMENT" == "prod" ]; then
   REGION=$PROD_REGION
