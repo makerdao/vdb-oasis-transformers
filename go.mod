@@ -3,7 +3,7 @@ module github.com/makerdao/vdb-oasis-transformers
 go 1.15
 
 require (
-	github.com/ethereum/go-ethereum v1.9.22
+	github.com/ethereum/go-ethereum v1.9.25
 	github.com/makerdao/vdb-transformer-utilities v0.0.0-20201021185605-2af87288ff1b
 	github.com/makerdao/vulcanizedb v0.1.0
 	github.com/onsi/ginkgo v1.14.1
