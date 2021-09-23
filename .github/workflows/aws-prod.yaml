@@ -38,7 +38,7 @@ jobs:
       run: |
         echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
-    - name: Build, tag, and push image to Amazon ECR
+    - name: Build, tag, and push image to Docker Registry
       id: build-image
       env:
         SHA_TAG: ${{ steps.vars.outputs.sha_short }}
