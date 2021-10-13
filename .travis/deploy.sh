@@ -15,12 +15,15 @@ TAG="latest"
 
 if [ "$ENVIRONMENT" == "prod" ]; then
   REGION=$PROD_REGION
+  VDB_VERSION="prod"
 elif [ "$ENVIRONMENT" == "private-prod" ]; then
   REGION=$PRIVATE_PROD_REGION
   ENVIRONMENT="prod"
+  VDB_VERSION="prod"
 elif [ "$ENVIRONMENT" == "qa" ]; then
   REGION=$QA_REGION
   TAG="develop"
+  VDB_VERSION="develop"
 else
     message UNKNOWN ENVIRONMENT
     echo 'You must specify an environment (bash deploy.sh <ENVIRONMENT>).'
@@ -33,7 +36,7 @@ message BUILDING EXECUTE DOCKER IMAGE
 COMMIT_HASH=${TRAVIS_COMMIT::7}
 IMMUTABLE_TAG=$TRAVIS_BUILD_NUMBER-$COMMIT_HASH
 
-docker build -f dockerfiles/execute/Dockerfile . -t makerdao/vdb-oasis-execute:$TAG -t makerdao/vdb-oasis-execute:$IMMUTABLE_TAG
+docker build --build-arg VDB_VERSION=$VDB_VERSION -f dockerfiles/execute/Dockerfile . -t makerdao/vdb-oasis-execute:$TAG -t makerdao/vdb-oasis-execute:$IMMUTABLE_TAG
 
 message LOGGING INTO DOCKERHUB
 echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USER" --password-stdin
