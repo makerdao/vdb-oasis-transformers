@@ -1,0 +1,41 @@
+dist: bionic
+language: go
+go:
+- 1.14
+services:
+- postgresql
+- docker
+addons:
+  postgresql: '11'
+apt:
+  packages:
+    - postgresql-11
+    - postgresql-client-11
+go_import_path: github.com/makerdao/vdb-oasis-transformers
+before_install:
+- make installtools
+- sudo apt-get update && sudo apt-get install python3-pip python3-setuptools -y
+- sudo pip3 install awscli
+script:
+- set -e
+- scripts/check_config.sh
+- env GO111MODULE=on make test
+- env GO111MODULE=on make integrationtest
+deploy:
+- provider: script
+  script: bash ./.travis/deploy.sh prod
+  on:
+    branch: main
+
+- provider: script
+  script: bash ./.travis/deploy.sh private-prod
+  on:
+    branch: main
+
+- provider: script
+  script: bash ./.travis/deploy.sh qa
+  on:
+    branch: develop
+
+notifications:
+  email: false
