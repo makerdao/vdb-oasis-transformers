@@ -9,15 +9,15 @@ jobs:
     steps:
       -
         name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       -
         name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.7
       -
         name: Build execute image
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: ./dockerfiles/execute/Dockerfile
